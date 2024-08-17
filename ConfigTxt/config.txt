@@ -1,0 +1,4 @@
+name config
+planesNum 12
+nodesNum 12
+sma 500 

@@ -1,0 +1,7 @@
+name config
+bandwidth 100000000 (bps)
+velocity 300000000 (m/s)
+packet_size 12000
+noisy 1 (1gauss 2random)
+distribution_left 0.5
+distribution_right 1

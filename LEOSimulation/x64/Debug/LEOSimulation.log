@@ -1,0 +1,4 @@
+﻿  DelaySimulation.cpp
+D:\Code\VS\LEOSimulation\DelaySimulation.cpp(84,39): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+D:\Code\VS\LEOSimulation\DelaySimulation.cpp(87,31): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+  LEOSimulation.vcxproj -> D:\Code\VS\LEOSimulation\x64\Debug\LEOSimulation.exe

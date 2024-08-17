@@ -1,0 +1,4 @@
+﻿  Graphics3D.cpp
+D:\Code\VS\LEOSimulation\Graphics3D\Graphics3D.cpp(189,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Code\VS\LEOSimulation\Graphics3D\Graphics3D.cpp(221,20): warning C4018: “<”: 有符号/无符号不匹配
+  Graphics3D.vcxproj -> D:\Code\VS\LEOSimulation\Graphics3D\Graphics3D.exe
