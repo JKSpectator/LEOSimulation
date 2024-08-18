@@ -28,6 +28,9 @@ private:
 	double random_in_range(double a, double b);
 
 public:
+	KeplerOrbits::GeoCoordinates source;
+	KeplerOrbits::GeoCoordinates target;
+
 	Communication(const string& configfile = "ConfigTxt\\communication_config.txt");
 
 	double communication_stt(double distance = 500000.0, int packet_size = 0, int bandwidth = -1, bool is_attacked = false, bool add_delay = true);

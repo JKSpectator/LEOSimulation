@@ -67,5 +67,6 @@ public:
 	double calculateMaxISLDistance(int min_communication_altitude = 1000);
 	double calculateDistanceBetweenSatellites(SatelliteStation s1, SatelliteStation s2);
 	void shortestPathByFloyd();
+	void AddGroundSandT(KeplerOrbits::GeoCoordinates source, KeplerOrbits::GeoCoordinates target);
 };
 

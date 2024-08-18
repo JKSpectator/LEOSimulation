@@ -334,6 +334,14 @@ void Constellation::shortestPathByFloyd()
 	}
 }
 
+void Constellation::AddGroundSandT(KeplerOrbits::GeoCoordinates source, KeplerOrbits::GeoCoordinates target)
+{
+	GroundStation gsT = GroundStation(-1 * grounds.size() - 1, "Target", target.latitude(), target.longitude(), LatLonToXYZ(target.latitude(), target.longitude())[0], LatLonToXYZ(target.latitude(), target.longitude())[1], LatLonToXYZ(target.latitude(), target.longitude())[2]);
+	grounds.insert(grounds.begin(), gsT);
+	GroundStation gsS = GroundStation(-1 * grounds.size() - 1, "Source", source.latitude(), source.longitude(), LatLonToXYZ(source.latitude(), source.longitude())[0], LatLonToXYZ(source.latitude(), source.longitude())[1], LatLonToXYZ(source.latitude(), source.longitude())[2]);
+	grounds.insert(grounds.begin(), gsS);
+}
+
 // 求最短路径
 int floyd(int from, int to) { //从起点到目标点 
 

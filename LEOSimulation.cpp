@@ -4,6 +4,7 @@
 #include "Constellation.h"
 
 Constellation cs;
+Communication comm;
 GLuint texture_id;
 static const float green[] = { 1,1,1,1 };
 float m_rotX = 0, m_rotY = 0, m_scale = 1.0f;
@@ -22,8 +23,6 @@ bool mouseLeftDown;
 float mouseX, mouseY;
 float cameraAngleX;
 float cameraAngleY;
-
-Communication comm;
 
 void AddGround(double x, double y, double z)
 {
@@ -492,7 +491,9 @@ void testGround()
 
 int main(int argc, char* argv[])
 {
-	Communication comm;
+	cs = Constellation();
+	comm = Communication();
+	cs.AddGroundSandT(comm.source, comm.target);
 	test(argc, argv);
 	testGround();
 	beginWindow();

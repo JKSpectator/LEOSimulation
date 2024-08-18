@@ -64,6 +64,26 @@ Communication::Communication(const std::string& configfile)
 						distribution_right = stod(value);
 					}
 				}
+				else if (key == "Source")
+				{
+					double lat = 0, lon = 0;
+					if (getline(iss, value, ' ')) {
+						lat = stod(value);
+						getline(iss, value, ' ');
+						lon = stod(value);
+					}
+					source = KeplerOrbits::GeoCoordinates(lat, lon, 0);
+				}
+				else if (key == "Target")
+				{
+					double lat = 0, lon = 0;
+					if (getline(iss, value, ' ')) {
+						lat = stod(value);
+						getline(iss, value, ' ');
+						lon = stod(value);
+					}
+					target = KeplerOrbits::GeoCoordinates(lat, lon, 0);
+				}
 			}
 		}
 	}
