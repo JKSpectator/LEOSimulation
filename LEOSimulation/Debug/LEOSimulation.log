@@ -1,16 +1,16 @@
 ﻿  LEOSimulation.cpp
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(268,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(284,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(310,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(320,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(324,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(328,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(332,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(350,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(352,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Code\VS\LEOSimulation\LEOSimulation.cpp(270,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Code\VS\LEOSimulation\LEOSimulation.cpp(286,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Code\VS\LEOSimulation\LEOSimulation.cpp(312,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Code\VS\LEOSimulation\LEOSimulation.cpp(322,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Code\VS\LEOSimulation\LEOSimulation.cpp(326,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Code\VS\LEOSimulation\LEOSimulation.cpp(330,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Code\VS\LEOSimulation\LEOSimulation.cpp(334,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Code\VS\LEOSimulation\LEOSimulation.cpp(358,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Code\VS\LEOSimulation\LEOSimulation.cpp(360,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Code\VS\LEOSimulation\LEOSimulation.cpp(471,20): warning C4018: “<”: 有符号/无符号不匹配
 D:\Code\VS\LEOSimulation\LEOSimulation.cpp(475,20): warning C4018: “<”: 有符号/无符号不匹配
 D:\Code\VS\LEOSimulation\LEOSimulation.cpp(479,20): warning C4018: “<”: 有符号/无符号不匹配
 D:\Code\VS\LEOSimulation\LEOSimulation.cpp(483,20): warning C4018: “<”: 有符号/无符号不匹配
 D:\Code\VS\LEOSimulation\LEOSimulation.cpp(487,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(491,20): warning C4018: “<”: 有符号/无符号不匹配
   LEOSimulation.vcxproj -> D:\Code\VS\LEOSimulation\Debug\LEOSimulation.exe

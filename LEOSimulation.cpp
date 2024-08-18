@@ -23,6 +23,8 @@ float mouseX, mouseY;
 float cameraAngleX;
 float cameraAngleY;
 
+Communication comm;
+
 void AddGround(double x, double y, double z)
 {
 	Vec3 p(x, y, z);
@@ -487,8 +489,6 @@ void testGround()
 		AddLink(cs.end[i].x, cs.end[i].y, cs.end[i].z, cs.grounds[1].x, cs.grounds[1].y, cs.grounds[1].z);
 	}
 }
-
-Communication comm;
 
 int main(int argc, char* argv[])
 {
