@@ -1,23 +1,4 @@
-﻿  Constellation.cpp
-D:\Code\VS\LEOSimulation\Constellation.cpp(147,21): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\Constellation.cpp(253,21): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\Constellation.cpp(309,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\Constellation.cpp(314,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\Constellation.cpp(319,20): warning C4018: “<”: 有符号/无符号不匹配
-  LEOSimulation.cpp
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(269,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(285,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(311,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(321,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(325,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(329,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(333,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(357,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(359,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(470,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(474,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(478,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(482,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(486,20): warning C4018: “<”: 有符号/无符号不匹配
-  正在生成代码...
+﻿  DelaySimulation.cpp
+D:\Code\VS\LEOSimulation\DelaySimulation.cpp(124,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Code\VS\LEOSimulation\DelaySimulation.cpp(151,20): warning C4018: “<”: 有符号/无符号不匹配
   LEOSimulation.vcxproj -> D:\Code\VS\LEOSimulation\Debug\LEOSimulation.exe

@@ -16,6 +16,9 @@ public:
 	double x;
 	double y;
 	double z;
+	double Lat();
+	double Lon();
+	void SetLatAndLon(double Lat, double Lon);
 	GroundStation(int ID = -1, string Name = nullptr, double Lat = 0, double Lon = 0, double X = 0, double Y = 0, double Z = 0);
 };
 
@@ -30,7 +33,8 @@ public:
 	double x;
 	double y;
 	double z;
-	SatelliteStation(int ID = 0, int pnum = 0, int onum = 0, double toffset = 0, double X = 0, double Y = 0, double Z = 0);
+	int enabled;//0：正常；1：被攻击，带宽减小；2：瘫痪
+	SatelliteStation(int ID = 0, int pnum = 0, int onum = 0, double toffset = 0, double X = 0, double Y = 0, double Z = 0, int enabledK = 0);
 };
 
 class Link
@@ -53,12 +57,14 @@ public:
 	vector<SatelliteStation> satellites;//卫星数组
 	vector<KeplerOrbits::OrbitBody> planes;
 	vector<Link> links;//链接数组
-	vector<SatelliteStation> start;//链接数组
+	vector<GroundStation> attack;//攻击地面站点
+	vector<SatelliteStation> start;//与数据来源地面站连接的卫星数组
 	vector<double> sdistance;
-	vector<SatelliteStation> end;//链接数组
+	vector<SatelliteStation> end;//与数据接收地面站连接的卫星数组
 	vector<double> edistance;
-	vector<int> pathId;
-	int pathDistance = 0;
+	vector<int> pathId;//发送到接收经过的节点/
+	vector<int> pathState;
+	vector<int> pathDistance;
 	vector<KeplerOrbits::OrbitBody> orbits;
 	Constellation(const string& datafile = "ConfigTxt\\city_data.txt", const string& configfile = "ConfigTxt\\config.txt");
 	vector<double> LatLonToXYZ(double lat, double lon);

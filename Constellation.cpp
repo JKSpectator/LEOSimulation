@@ -6,6 +6,13 @@ int dist[MAX_SATALLITE_NUM];      //d[i]表示起点到i这个点的距离
 int visit[MAX_SATALLITE_NUM];  //节点是否被访问 
 int n;
 
+std::random_device rd;
+std::mt19937 gen(rd());
+
+// 定义分布
+std::uniform_int_distribution<> dis(0, 10);
+#define DISABLED_NUM 3
+
 GroundStation::GroundStation(int ID, string Name, double Lat, double Lon, double X, double Y, double Z)
 {
 	id = ID;
@@ -17,7 +24,23 @@ GroundStation::GroundStation(int ID, string Name, double Lat, double Lon, double
 	z = Z;
 }
 
-SatelliteStation::SatelliteStation(int ID, int pnum, int onum, double toffset, double X, double Y, double Z)
+void GroundStation::SetLatAndLon(double Lat, double Lon)
+{
+	lat = Lat;
+	lon = Lon;
+}
+
+double GroundStation::Lat()
+{
+	return lat;
+}
+
+double GroundStation::Lon()
+{
+	return lon;
+}
+
+SatelliteStation::SatelliteStation(int ID, int pnum, int onum, double toffset, double X, double Y, double Z, int enabledK)
 {
 	id = ID;
 	plane_num = pnum;
@@ -26,10 +49,12 @@ SatelliteStation::SatelliteStation(int ID, int pnum, int onum, double toffset, d
 	x = X;
 	y = Y;
 	z = Z;
+	enabled = enabledK;
 }
 
 Constellation::Constellation(const string& datafile, const string& configfile)
 {
+	attack.push_back(GroundStation(0, "null", 0, 0, 0, 0, 0));
 	//地面站信息获取
 	ifstream data(datafile);
 	int g_id = -1;
@@ -111,8 +136,8 @@ Constellation::Constellation(const string& datafile, const string& configfile)
 		KeplerOrbits::Trajectory trajectory = planes[i].GetTrajectory(num_nodes_per_plane);
 		for (int j = 0; j < num_nodes_per_plane; j++)
 		{
-			double tf = (planes[i].GetSiderealOrbitPeriod() / num_nodes_per_plane) * j;
-			SatelliteStation s = SatelliteStation(s_id, i, j, 0, trajectory[j].x(), trajectory[j].y(), trajectory[j].z());
+			//double tf = (planes[i].GetSiderealOrbitPeriod() / num_nodes_per_plane) * j;
+			SatelliteStation s = SatelliteStation(s_id, i, j, 0, trajectory[j].x(), trajectory[j].y(), trajectory[j].z(), 0);
 			s_id++;
 			satellites.push_back(s);
 			if (j != 0)
@@ -187,13 +212,14 @@ void Constellation::updateSatellites()
 	sdistance.clear();
 	edistance.clear();
 	pathId.clear();
+	pathDistance.clear();
 	int s_id = 0;
 	for (int i = 0; i < num_planes; i++)
 	{
 		KeplerOrbits::Trajectory trajectory = planes[i].GetTrajectory(num_nodes_per_plane, m_time);
 		for (int j = 0; j < num_nodes_per_plane; j++)
 		{
-			double tf = (planes[i].GetSiderealOrbitPeriod() / num_nodes_per_plane) * j;
+			//double tf = (planes[i].GetSiderealOrbitPeriod() / num_nodes_per_plane) * j;
 			satellites[s_id].x = trajectory[j].x();
 			satellites[s_id].y = trajectory[j].y();
 			satellites[s_id].z = trajectory[j].z();
@@ -252,6 +278,7 @@ void Constellation::updateSatellites()
 	{
 		for (int j = 0; j < satellites.size(); j++)
 		{
+			satellites[j].enabled = 0;
 			double d = sqrt(pow(satellites[j].x - grounds[i].x, 2) + pow(satellites[j].y - grounds[i].y, 2) + pow(satellites[j].z - grounds[i].z, 2));
 			//cout << d << endl;
 			if ((int)d < (int)max_distance)
@@ -267,6 +294,15 @@ void Constellation::updateSatellites()
 					edistance.push_back(d);
 				}
 			}
+		}
+	}
+	for (int j = 0; j < satellites.size() && attack.size()>0; j++)
+	{
+		double d = sqrt(pow(satellites[j].x - attack[0].x, 2) + pow(satellites[j].y - attack[0].y, 2) + pow(satellites[j].z - attack[0].z, 2));
+		//cout << d << endl;
+		if ((int)d < (int)max_distance)
+		{
+			satellites[j].enabled = dis(gen) < DISABLED_NUM ? 2 : 1;
 		}
 	}
 	if (start.size() != 0 && end.size() != 0)
@@ -308,29 +344,55 @@ void Constellation::shortestPathByFloyd()
 	}
 	for (int i = 0; i < links.size(); i++)
 	{
-		map[links[i].source.id + 1][links[i].target.id + 1] = (int)links[i].distance;
-		map[links[i].target.id + 1][links[i].source.id + 1] = (int)links[i].distance;
+		if (links[i].source.enabled != 2 && links[i].target.enabled != 2)
+		{
+			map[links[i].source.id + 1][links[i].target.id + 1] = (int)links[i].distance;
+			map[links[i].target.id + 1][links[i].source.id + 1] = (int)links[i].distance;
+		}
 	}
 	for (int i = 0; i < start.size(); i++)
 	{
-		map[0][start[i].id + 1] = (int)sdistance[i];
-		map[start[i].id + 1][0] = (int)sdistance[i];
+		if (start[i].enabled != 2)
+		{
+			map[0][start[i].id + 1] = (int)sdistance[i];
+			map[start[i].id + 1][0] = (int)sdistance[i];
+		}
 	}
 	for (int i = 0; i < end.size(); i++)
 	{
-		map[n - 1][end[i].id + 1] = (int)edistance[i];
-		map[end[i].id + 1][n - 1] = (int)edistance[i];
+		if (end[i].enabled != 2)
+		{
+			map[n - 1][end[i].id + 1] = (int)edistance[i];
+			map[end[i].id + 1][n - 1] = (int)edistance[i];
+		}
 	}
 	int ans = floyd(0, n - 1);
 	if (ans < INT_MAX)
 	{
 		int k = path[0][n - 1];
+		pathDistance.push_back(ans);
 		while (k != n - 1)
 		{
 			pathId.push_back(k - 1);
+			pathState.push_back(satellites[k - 1].enabled);
 			k = path[k][n - 1];
 		}
-		pathDistance = ans;
+
+		for (int i = 0; i < pathId.size(); i++)
+		{
+			if (i == 0)
+			{
+				pathDistance.push_back(map[0][pathId[0] + 1]);
+			}
+			else
+			{
+				pathDistance.push_back(map[pathId[i-1]+1][pathId[i]]);
+			}
+			if (i == pathId.size() - 1)
+			{
+				pathDistance.push_back(map[pathId[i]+1][n - 1]);
+			}
+		}
 	}
 }
 

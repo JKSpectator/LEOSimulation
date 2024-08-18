@@ -84,13 +84,23 @@ Communication::Communication(const std::string& configfile)
 					}
 					target = KeplerOrbits::GeoCoordinates(lat, lon, 0);
 				}
+				else if (key == "Attack")
+				{
+					double lat = 0, lon = 0;
+					if (getline(iss, value, ' ')) {
+						lat = stod(value);
+						getline(iss, value, ' ');
+						lon = stod(value);
+					}
+					attack = KeplerOrbits::GeoCoordinates(lat, lon, 0);
+				}
 			}
 		}
 	}
 	config.close();
 }
 
-double Communication::communication_stt(double distance, int packet_size, int bandwidth, bool is_attacked, bool add_delay)
+double Communication::communication_stt(vector<int> distance, vector<int> stationState, int packet_size, int bandwidth, bool is_attacked, bool add_delay)
 {
 	if (packet_size == 0) {
 		packet_size = this->packet_size;
@@ -110,8 +120,13 @@ double Communication::communication_stt(double distance, int packet_size, int ba
 	}
 
 	double delay = 0.0;
-	double send_delay = static_cast<double>(packet_size) / bandwidth;
-	double propagation_delay = distance / this->velocity;
+	double send_delay = static_cast<double>(packet_size) / bandwidth;//static_cast<double>(packet_size) * stationState.size() / bandwidth;
+	for (int i = 0; i < stationState.size(); i++)
+	{
+		send_delay += static_cast<double>(packet_size) / random_in_range(this->distribution_left * bandwidth, this->distribution_right * bandwidth);
+	}
+
+	double propagation_delay = distance[0] / this->velocity;
 	delay = send_delay + propagation_delay;
 
 	if (add_delay) {
@@ -121,7 +136,7 @@ double Communication::communication_stt(double distance, int packet_size, int ba
 	return delay;
 }
 
-double Communication::communication_stt_no_noisy(double distance, int packet_size, int bandwidth, bool add_delay)
+double Communication::communication_stt_no_noisy(vector<int> distance, vector<int> stationState,  int packet_size, int bandwidth, bool add_delay)
 {
 	if (packet_size == 0) {
 		packet_size = this->packet_size;
@@ -132,8 +147,12 @@ double Communication::communication_stt_no_noisy(double distance, int packet_siz
 	}
 
 	double delay = 0.0;
-	double send_delay = static_cast<double>(packet_size) / bandwidth;
-	double propagation_delay = distance / this->velocity;
+	double send_delay = static_cast<double>(packet_size) / bandwidth;//static_cast<double>(packet_size) * stationState.size() / bandwidth;
+	for (int i = 0; i < stationState.size(); i++)
+	{
+		send_delay += static_cast<double>(packet_size) / random_in_range(this->distribution_left * bandwidth, this->distribution_right * bandwidth);
+	}
+	double propagation_delay = distance[0] / this->velocity;
 	delay = send_delay + propagation_delay;
 
 	if (add_delay) {
@@ -143,11 +162,11 @@ double Communication::communication_stt_no_noisy(double distance, int packet_siz
 	return delay;
 }
 
-double Communication::communication_stt_ideal(double distance, bool add_delay)
+double Communication::communication_stt_ideal(vector<int> distance, bool add_delay)
 {
 
 	double delay = 0.0;
-	double propagation_delay = distance / this->velocity;
+	double propagation_delay = distance[0] / this->velocity;
 	delay = propagation_delay;
 
 	if (add_delay) {

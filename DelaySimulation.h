@@ -30,12 +30,13 @@ private:
 public:
 	KeplerOrbits::GeoCoordinates source;
 	KeplerOrbits::GeoCoordinates target;
+	KeplerOrbits::GeoCoordinates attack;
 
 	Communication(const string& configfile = "ConfigTxt\\communication_config.txt");
 
-	double communication_stt(double distance = 500000.0, int packet_size = 0, int bandwidth = -1, bool is_attacked = false, bool add_delay = true);
+	double communication_stt(vector<int> distance, vector<int> stationState, int packet_size = 0, int bandwidth = -1, bool is_attacked = false, bool add_delay = true);
 
-	double communication_stt_no_noisy(double distance = 500000.0, int packet_size = 0, int bandwidth = -1, bool add_delay = true);
+	double communication_stt_no_noisy(vector<int> distance, vector<int> stationState, int packet_size = 0, int bandwidth = -1, bool add_delay = true);
 
-	double communication_stt_ideal(double distance = 500000.0, bool add_delay = true);
+	double communication_stt_ideal(vector<int> distance, bool add_delay = true);
 };

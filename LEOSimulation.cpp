@@ -15,8 +15,10 @@ vector<Vec3> linkS;
 vector<Vec3> linkT;
 vector<Vec3> linkSU;
 vector<Vec3> linkTU;
+Vec3 attack = Vec3(0, 0, 0);
 vector<Vec3> grounds;
-vector<Vec3> satellites;
+vector<Vec3> satellitesE;
+vector<Vec3> satellitesD;
 string bmpfile = "OpenGL/2k_earth_daymap.bmp";
 
 bool mouseLeftDown;
@@ -30,10 +32,16 @@ void AddGround(double x, double y, double z)
 	grounds.push_back(p);
 }
 
-void AddSatellite(double x, double y, double z)
+void AddSatelliteE(double x, double y, double z)
 {
 	Vec3 p(x, y, z);
-	satellites.push_back(p);
+	satellitesE.push_back(p);
+}
+
+void AddSatelliteD(double x, double y, double z)
+{
+	Vec3 p(x, y, z);
+	satellitesD.push_back(p);
 }
 
 void AddLink(double xs, double ys, double zs, double xt, double yt, double zt)
@@ -130,7 +138,7 @@ void LoadTextures(GLuint texture_id, int MaxNrofTextures)
 	}
 }
 
-void drawSatellite(Vec3 _p)
+void drawSatellite(Vec3 _p, bool enabled = true)
 {
 	glPushMatrix();
 
@@ -140,8 +148,11 @@ void drawSatellite(Vec3 _p)
 	glEnable(GL_DEPTH_TEST);
 
 	glScaled(1000.0f, 1000.0f, 1000.0f);
+	if(enabled ==true)
+		glColor3f(0.0f, 0.0f, 1.0f);
+	else
+		glColor3f(1.0f, 0.0f, 0.0f);
 	glBegin(GL_QUADS);
-	glColor3f(1.0f, 0.0f, 0.0f);
 	//Front Face
 	glNormal3f(0.0f, 0.0f, 1.0f);
 	glTexCoord2f(0.0f, 0.0f);   glVertex3f(-1.0f, -1.0f, 1.0f);
@@ -201,6 +212,65 @@ void drawGround(Vec3 _p)
 	glScaled(500.0f, 500.0f, 500.0f);
 	glBegin(GL_QUADS);
 	glColor3f(0.0f, 1.0f, 0.0f);
+	//Front Face
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glTexCoord2f(0.0f, 0.0f);   glVertex3f(-1.0f, -1.0f, 1.0f);
+	glTexCoord2f(1.0f, 0.0f);   glVertex3f(1.0f, -1.0f, 1.0f);
+	glTexCoord2f(1.0f, 1.0f);   glVertex3f(1.0f, 1.0f, 1.0f);
+	glTexCoord2f(0.0f, 1.0f);   glVertex3f(-1.0f, 1.0f, 1.0f);
+	//Back Face
+	glNormal3f(0.0f, 0.0f, -1.0f);
+	glTexCoord2f(1.0f, 0.0f);   glVertex3f(-1.0f, -1.0f, -1.0f);
+	glTexCoord2f(1.0f, 1.0f);   glVertex3f(-1.0f, 1.0f, -1.0f);
+	glTexCoord2f(0.0f, 1.0f);   glVertex3f(1.0f, 1.0f, -1.0f);
+	glTexCoord2f(0.0f, 0.0f);   glVertex3f(1.0f, -1.0f, -1.0f);
+	//Top Face
+	glNormal3f(0.0f, 1.0f, 0.0f);
+	glTexCoord2f(0.0f, 1.0f);   glVertex3f(-1.0f, 1.0f, -1.0f);
+	glTexCoord2f(0.0f, 0.0f);   glVertex3f(-1.0f, 1.0f, 1.0f);
+	glTexCoord2f(1.0f, 0.0f);   glVertex3f(1.0f, 1.0f, 1.0f);
+	glTexCoord2f(1.0f, 1.0f);   glVertex3f(1.0f, 1.0f, -1.0f);
+	//Bottom Face
+	glNormal3f(0.0f, -1.0f, 0.0f);
+	glTexCoord2f(1.0f, 1.0f);   glVertex3f(-1.0f, -1.0f, -1.0f);
+	glTexCoord2f(0.0f, 1.0f);   glVertex3f(1.0f, -1.0f, -1.0f);
+	glTexCoord2f(0.0f, 0.0f);   glVertex3f(1.0f, -1.0f, 1.0f);
+	glTexCoord2f(1.0f, 0.0f);   glVertex3f(-1.0f, -1.0f, 1.0f);
+	//Right Face
+	glNormal3f(1.0f, 0.0f, 0.0f);
+	glTexCoord2f(1.0f, 0.0f);   glVertex3f(1.0f, -1.0f, -1.0f);
+	glTexCoord2f(1.0f, 1.0f);   glVertex3f(1.0f, 1.0f, -1.0f);
+	glTexCoord2f(0.0f, 1.0f);   glVertex3f(1.0f, 1.0f, 1.0f);
+	glTexCoord2f(0.0f, 0.0f);   glVertex3f(1.0f, -1.0f, 1.0f);
+	//Left Face
+	glNormal3f(-1.0f, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 0.0f);   glVertex3f(-1.0f, -1.0f, -1.0f);
+	glTexCoord2f(1.0f, 0.0f);   glVertex3f(-1.0f, -1.0f, 1.0f);
+	glTexCoord2f(1.0f, 1.0f);   glVertex3f(-1.0f, 1.0f, 1.0f);
+	glTexCoord2f(0.0f, 1.0f);   glVertex3f(-1.0f, 1.0f, -1.0f);
+	glEnd();
+
+
+
+	glPopMatrix();
+	glEnable(GL_TEXTURE_2D);
+	/*glDisable(GL_DEPTH_TEST);
+	glEnable(GL_LIGHTING);*/
+	glColor3f(1.0f, 1.0f, 1.0f);
+}
+
+void drawAttack(Vec3 _p)
+{
+	glPushMatrix();
+
+	glTranslated(_p.x, _p.y, _p.z);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_DEPTH_TEST);
+
+	glScaled(500.0f, 500.0f, 500.0f);
+	glBegin(GL_QUADS);
+	glColor3f(1.0f, 1.0f, 0.0f);
 	//Front Face
 	glNormal3f(0.0f, 0.0f, 1.0f);
 	glTexCoord2f(0.0f, 0.0f);   glVertex3f(-1.0f, -1.0f, 1.0f);
@@ -308,11 +378,14 @@ void display()
 	cameraAngleY = 0;
 
 	cs.updateSatellites();
+	satellitesD.clear();
+	satellitesE.clear();
 	for (int i = 0; i < cs.satellites.size(); i++)
 	{
-		satellites[i].x = cs.satellites[i].x;
-		satellites[i].y = cs.satellites[i].y;
-		satellites[i].z = cs.satellites[i].z;
+		if (cs.satellites[i].enabled != 2)
+			AddSatelliteE(cs.satellites[i].x, cs.satellites[i].y, cs.satellites[i].z);
+		else
+			AddSatelliteD(cs.satellites[i].x, cs.satellites[i].y, cs.satellites[i].z);
 	}
 	linkS.clear();
 	linkT.clear();
@@ -347,19 +420,22 @@ void display()
 	}
 	if (cs.pathId.size() != 0)
 	{
-		cout << "通信延迟：" << comm.communication_stt(cs.pathDistance) << endl;
-		cout << "无噪声通信延迟：" << comm.communication_stt_no_noisy(cs.pathDistance) << endl;
+		cout << "通信延迟：" << comm.communication_stt(cs.pathDistance, cs.pathState) << endl;
+		cout << "无噪声通信延迟：" << comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState) << endl;
 		cout << "最理想通信延迟：" << comm.communication_stt_ideal(cs.pathDistance) << endl;
 	}
 	glPushMatrix();
 
 	drawEarth3D(earthR);//draw earth
-	for (int i = 0; i < satellites.size(); i++)
-		drawSatellite(satellites[i]);// load satellite
+	for (int i = 0; i < satellitesE.size(); i++)
+		drawSatellite(satellitesE[i], true);// load satellite
+	for (int i = 0; i < satellitesD.size(); i++)
+		drawSatellite(satellitesD[i], false);// load satellite
 	for (int i = 0; i < grounds.size(); i++)
 	{
 		drawGround(grounds[i]);//load ground
 	}
+	drawAttack(attack);
 	drawLine3D();// draw track lines
 	drawLineUSing();
 	glPopMatrix();
@@ -471,9 +547,15 @@ void testGround()
 	{
 		AddGround(cs.grounds[i].x, cs.grounds[i].y, cs.grounds[i].z);
 	}
+	attack.x = cs.attack[0].x;
+	attack.y = cs.attack[0].y;
+	attack.z = cs.attack[0].z;
 	for (int i = 0; i < cs.satellites.size(); i++)
 	{
-		AddSatellite(cs.satellites[i].x, cs.satellites[i].y, cs.satellites[i].z);
+		if (cs.satellites[i].enabled != 2)
+			AddSatelliteE(cs.satellites[i].x, cs.satellites[i].y, cs.satellites[i].z);
+		else
+			AddSatelliteD(cs.satellites[i].x, cs.satellites[i].y, cs.satellites[i].z);
 	}
 	for (int i = 0; i < cs.links.size(); i++)
 	{
@@ -493,6 +575,10 @@ int main(int argc, char* argv[])
 {
 	cs = Constellation();
 	comm = Communication();
+	cs.attack[0].SetLatAndLon(comm.attack.latitude(), comm.attack.longitude());
+	cs.attack[0].x = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[0];
+	cs.attack[0].y = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[1];
+	cs.attack[0].z = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[2];
 	cs.AddGroundSandT(comm.source, comm.target);
 	test(argc, argv);
 	testGround();
