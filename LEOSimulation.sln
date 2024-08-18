@@ -5,8 +5,6 @@ VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LEOSimulation", "LEOSimulation.vcxproj", "{45638629-1ECE-486E-AF78-86C7323B54DA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphics3D", "Graphics3D\Graphics3D.vcxproj", "{5B5B9DD0-71F5-4EC4-8E25-A1BC287EA984}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -23,14 +21,6 @@ Global
 		{45638629-1ECE-486E-AF78-86C7323B54DA}.Release|x64.Build.0 = Release|x64
 		{45638629-1ECE-486E-AF78-86C7323B54DA}.Release|x86.ActiveCfg = Release|Win32
 		{45638629-1ECE-486E-AF78-86C7323B54DA}.Release|x86.Build.0 = Release|Win32
-		{5B5B9DD0-71F5-4EC4-8E25-A1BC287EA984}.Debug|x64.ActiveCfg = Debug|x64
-		{5B5B9DD0-71F5-4EC4-8E25-A1BC287EA984}.Debug|x64.Build.0 = Debug|x64
-		{5B5B9DD0-71F5-4EC4-8E25-A1BC287EA984}.Debug|x86.ActiveCfg = Debug|Win32
-		{5B5B9DD0-71F5-4EC4-8E25-A1BC287EA984}.Debug|x86.Build.0 = Debug|Win32
-		{5B5B9DD0-71F5-4EC4-8E25-A1BC287EA984}.Release|x64.ActiveCfg = Release|x64
-		{5B5B9DD0-71F5-4EC4-8E25-A1BC287EA984}.Release|x64.Build.0 = Release|x64
-		{5B5B9DD0-71F5-4EC4-8E25-A1BC287EA984}.Release|x86.ActiveCfg = Release|Win32
-		{5B5B9DD0-71F5-4EC4-8E25-A1BC287EA984}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

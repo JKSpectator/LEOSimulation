@@ -1,2 +1,0 @@
-D:\Code\VS\AstroLib-master\Graphics3D\Graphics3D.exe
-D:\Code\VS\LEOSimulation\Graphics3D\Graphics3D.exe
