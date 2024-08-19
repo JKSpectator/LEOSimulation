@@ -1,10 +1,13 @@
 #pragma once
 #include "Allinclude.h"
+//设定的模拟卫星的最多数量，根据内存更改
 #define MAX_SATALLITE_NUM 225
-
+//最短路径算法通用函数
 int floyd(int from, int to);
-int dijkstra(int from, int to);
 
+/// <summary>
+/// 陆地节点类
+/// </summary>
 class GroundStation
 {
 private:
@@ -22,6 +25,9 @@ public:
 	GroundStation(int ID = -1, string Name = nullptr, double Lat = 0, double Lon = 0, double X = 0, double Y = 0, double Z = 0);
 };
 
+/// <summary>
+/// 卫星节点类
+/// </summary>
 class SatelliteStation
 {
 private:
@@ -37,6 +43,9 @@ public:
 	SatelliteStation(int ID = 0, int pnum = 0, int onum = 0, double toffset = 0, double X = 0, double Y = 0, double Z = 0, int enabledK = 0);
 };
 
+/// <summary>
+/// 卫星可通信链接类
+/// </summary>
 class Link
 {
 public:
@@ -45,10 +54,13 @@ public:
 	double distance;
 };
 
+/// <summary>
+/// LEO星座数据存储类
+/// </summary>
 class Constellation
 {
 public:
-	double earth_radius = 6.378137e4;
+	double earth_radius = 6.378137e4;//地球半径
 	int num_planes;//卫星平面数量
 	int num_nodes_per_plane;//每个平面的卫星数量
 	double sma;//长半轴距离

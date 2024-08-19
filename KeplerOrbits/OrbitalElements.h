@@ -1,5 +1,5 @@
 #pragma once
-
+//轨道形状参数
 namespace KeplerOrbits
 {
 	class OrbitalElements
@@ -33,31 +33,62 @@ namespace KeplerOrbits
 		/// <returns>形状参数</returns>
 		OrbitalElements& SetTimeSpecific(double meanLongitude, double epoch);
 
-		//计算并返回天体的平近点角
+		/// <summary>
+		/// 计算并返回天体的平近点角
+		/// </summary>
+		/// <returns>平近点角</returns>
 		double GetMeanAnomaly() const;
 
-		//根据输入的儒略日（Julian Date, jd）计算并返回天体在该日期的真实近点角（True Anomaly, ν）
+		/// <summary>
+		/// 根据输入的儒略日（Julian Date）计算并返回天体在该日期的真实近点角（True Anomaly, ν）
+		/// </summary>
+		/// <param name="jd">儒略日</param>
+		/// <returns>真实近点角</returns>
 		double GetTSE(double jd) const;
 
-		//根据输入的平近点角（Mean Anomaly, m），计算并返回天体的偏近点角（Eccentric Anomaly, E
+		/// <summary>
+		/// 根据输入的平近点角（Mean Anomaly），计算并返回天体的偏近点角（Eccentric Anomaly, E）
+		/// </summary>
+		/// <param name="m">平近点角</param>
+		/// <returns>偏近点角</returns>
 		double GetEccentricAnomaly(double m) const;
 
-		//根据输入的偏近点角（Eccentric Anomaly），计算并返回天体在轨道上的当前半径或距离中心天体的距离
+		/// <summary>
+		/// 根据输入的偏近点角（Eccentric Anomaly），计算并返回天体在轨道上的当前半径或距离中心天体的距离
+		/// </summary>
+		/// <param name="eccentricAnomaly">偏近点角</param>
+		/// <returns>距离中心天体的距离</returns>
 		double GetRadius(double eccentricAnomaly) const;
 
-		//计算并返回天体的近点幅角（Argument of Periapsis, ω），这是从升交点到近点的角度，是描述轨道形状的另一个角度参数
+		/// <summary>
+		/// 计算并返回天体的近点幅角（Argument of Periapsis, ω），这是从升交点到近点的角度，是描述轨道形状的另一个角度参数
+		/// </summary>
+		/// <returns>近点幅角</returns>
 		double GetArgumentOfPeriapsis() const;
 
-		//根据输入的偏近点角（Eccentric Anomaly），计算并返回天体的真实近点角（True Anomaly, ν）。真实近点角是天体在轨道上的实际位置角度，相对于近点
+		/// <summary>
+		/// 根据输入的偏近点角（Eccentric Anomaly），计算并返回天体的真实近点角（True Anomaly, ν）。真实近点角是天体在轨道上的实际位置角度，相对于近点
+		/// </summary>
+		/// <param name="eccentricAnomaly">偏近点角</param>
+		/// <returns>真实近点角</returns>
 		double GetTrueAnomaly(double eccentricAnomaly) const;
 
-		//计算并返回天体轨道的升交点赤经（Longitude of the Ascending Node, Ω），这是轨道平面与参考平面（如赤道或黄道）相交的点的经度
+		/// <summary>
+		/// 计算并返回天体轨道的升交点赤经（Longitude of the Ascending Node, Ω），这是轨道平面与参考平面（赤道）相交的点的经度
+		/// </summary>
+		/// <returns>升交点赤经</returns>
 		double GetLongitudeOfAscendingNode() const;
 
-		//计算并返回天体轨道的倾角（Inclination, i），这是轨道平面相对于参考平面（如赤道或黄道）的倾斜角度
+		/// <summary>
+		/// 返回天体轨道的倾角（Inclination, i），这是轨道平面相对于参考平面（如赤道或黄道）的倾斜角度
+		/// </summary>
+		/// <returns>天体轨道的倾角</returns>
 		double GetInclination() const;
 
-		//计算并返回天体的轨道周期（Orbit Period, T），这是天体绕中心天体一周所需的时间
+		/// <summary>
+		/// 计算并返回天体的轨道周期（Orbit Period, T），这是天体绕中心天体一周所需的时间
+		/// </summary>
+		/// <returns>天体的轨道周期</returns>
 		double GetOrbitPeriod();
 
 	private:

@@ -1,4 +1,12 @@
 name config
+Mode Auto //Manual
 planesNum 12
 nodesNum 12
 sma 500 
+ManualPlanesNum 1
+ManualNodesNum 1
+Ecc 1
+Sma 1
+Inc 1
+Lta 1
+Ltp 1

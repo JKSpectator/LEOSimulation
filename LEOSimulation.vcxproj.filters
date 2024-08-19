@@ -21,9 +21,6 @@
     <ClCompile Include="DelaySimulation.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="GlutUI.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Constellation.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -38,9 +35,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AstroLib.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="DelaySimulation.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -48,9 +42,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="OpenGL\glut.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="GlutUI.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Constellation.h">
@@ -63,6 +54,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="KeplerOrbits\OrbitBody.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LEOSimulation.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

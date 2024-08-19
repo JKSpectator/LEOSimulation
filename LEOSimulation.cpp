@@ -1,26 +1,23 @@
 #include "Allinclude.h"
 #include "DelaySimulation.h"
-#include "GlutUI.h"
+#include "LEOSimulation.h"
 #include "Constellation.h"
 
 Constellation cs;
 Communication comm;
 GLuint texture_id;
-static const float green[] = { 1,1,1,1 };
-float m_rotX = 0, m_rotY = 0, m_scale = 1.0f;
-float angle_satellite = 0;
-double scale = 1.0;
-GLfloat aspect = 1.0;
-vector<Vec3> linkS;
-vector<Vec3> linkT;
-vector<Vec3> linkSU;
-vector<Vec3> linkTU;
-Vec3 attack = Vec3(0, 0, 0);
-vector<Vec3> grounds;
-vector<Vec3> satellitesE;
-vector<Vec3> satellitesD;
-string bmpfile = "OpenGL/2k_earth_daymap.bmp";
+GLfloat aspect = 1.0;//可视化窗口分辨率
+vector<Vec3> linkS;//可通信链接起始点
+vector<Vec3> linkT;//可通信链接终点
+vector<Vec3> linkSU;//正在使用的通信链接起始点
+vector<Vec3> linkTU;//正在使用的通信链接终点
+Vec3 attack = Vec3(0, 0, 0);//地面攻击节点
+vector<Vec3> grounds;//地面通信节点
+vector<Vec3> satellitesE;//使能的卫星节点
+vector<Vec3> satellitesD;//不使能的卫星节点
+string bmpfile = "OpenGL/2k_earth_daymap.bmp";//地图文件
 
+//辅助视角变化参数
 bool mouseLeftDown;
 float mouseX, mouseY;
 float cameraAngleX;
@@ -325,7 +322,7 @@ void drawAttackSphere()
 	glColor4f(1, 0, 0, 0.5);
 	glTranslatef(attack.x, attack.y, attack.z);
 	GLUquadricObj* quad = gluNewQuadric();
-	gluQuadricDrawStyle(quad, GLU_POINT);
+	gluQuadricDrawStyle(quad, GLU_FILL);
 	gluQuadricNormals(quad, GLU_SMOOTH);
 	gluSphere(quad, 20000, 50, 50);
 	gluDeleteQuadric(quad);
@@ -392,6 +389,30 @@ void display()
 	cameraAngleX = 0;
 	cameraAngleY = 0;
 
+	updateConstellation();
+
+	glPushMatrix();
+
+	drawEarth3D(earthR);//draw earth
+	//drawAttackSphere();
+	for (int i = 0; i < satellitesE.size(); i++)
+		drawSatellite(satellitesE[i], true);// load satellite
+	for (int i = 0; i < satellitesD.size(); i++)
+		drawSatellite(satellitesD[i], false);// load satellite
+	for (int i = 0; i < grounds.size(); i++)
+	{
+		drawGround(grounds[i]);//load ground
+	}
+	drawAttack(attack);
+	drawLine3D();// draw track lines
+	drawLineUSing();
+	glPopMatrix();
+
+	glutSwapBuffers();
+}
+
+void updateConstellation()
+{
 	cs.updateSatellites();
 	satellitesD.clear();
 	satellitesE.clear();
@@ -439,24 +460,6 @@ void display()
 		cout << "无噪声通信延迟：" << comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState) << endl;
 		cout << "最理想通信延迟：" << comm.communication_stt_ideal(cs.pathDistance) << endl;
 	}
-	glPushMatrix();
-
-	drawEarth3D(earthR);//draw earth
-	//drawAttackSphere();
-	for (int i = 0; i < satellitesE.size(); i++)
-		drawSatellite(satellitesE[i], true);// load satellite
-	for (int i = 0; i < satellitesD.size(); i++)
-		drawSatellite(satellitesD[i], false);// load satellite
-	for (int i = 0; i < grounds.size(); i++)
-	{
-		drawGround(grounds[i]);//load ground
-	}
-	drawAttack(attack);
-	drawLine3D();// draw track lines
-	drawLineUSing();
-	glPopMatrix();
-
-	glutSwapBuffers();
 }
 
 void InitWindow(int argc, char* argv[], int width, int height, const char* title)
@@ -596,6 +599,7 @@ int main(int argc, char* argv[])
 	cs.attack[0].y = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[1];
 	cs.attack[0].z = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[2];
 	cs.AddGroundSandT(comm.source, comm.target);
+
 	test(argc, argv);
 	testGround();
 	beginWindow();

@@ -77,6 +77,12 @@ Constellation::Constellation(const string& datafile, const string& configfile)
 	}
 	data.close();
 	//卫星信息
+	int mode = 1;//Mode=1自动生成轨道，Mode=2手动设置轨道参数
+	vector<double> Ecc;
+	vector<double> Sma;
+	vector<double> Inc;
+	vector<double> Lta;
+	vector<double> Ltp;
 	ifstream config(configfile);
 	int s_id = 0;
 	if (config.is_open())
@@ -91,17 +97,58 @@ Constellation::Constellation(const string& datafile, const string& configfile)
 			{
 				string value;
 				getline(iss, value, ' ');
-				if (key == "planesNum")
+				if (key == "Mode")
 				{
-					num_planes = stoi(value);
+					if (value == "Auto")
+						mode = 1;
+					else
+						mode = 2;
 				}
-				else if (key == "nodesNum")
+				if (mode == 1)
 				{
-					num_nodes_per_plane = stoi(value);
+					if (key == "planesNum")
+					{
+						num_planes = stoi(value);
+					}
+					else if (key == "nodesNum")
+					{
+						num_nodes_per_plane = stoi(value);
+					}
+					else if (key == "sma")
+					{
+						sma = stod(value) * 10 + earth_radius;
+					}
 				}
-				else if (key == "sma")
+				else
 				{
-					sma = stod(value) * 10 + earth_radius;
+					if (key == "ManualPlanesNum")
+					{
+						num_planes = stoi(value);
+					}
+					else if (key == "ManualNodesNum")
+					{
+						num_nodes_per_plane = stoi(value);
+					}
+					else if (key == "Ecc")
+					{
+						Ecc.push_back(stod(value));
+					}
+					else if (key == "Sma")
+					{
+						Sma.push_back(stod(value));
+					}
+					else if (key == "Inc")
+					{
+						Inc.push_back(stod(value));
+					}
+					else if (key == "Lta")
+					{
+						Lta.push_back(stod(value));
+					}
+					else if (key == "Ltp")
+					{
+						Ltp.push_back(stod(value));
+					}
 				}
 			}
 		}
@@ -111,9 +158,18 @@ Constellation::Constellation(const string& datafile, const string& configfile)
 	for (int i = 0; i < num_planes; i++)
 	{
 		KeplerOrbits::OrbitalElements orbitalElements;
-		orbitalElements.SetEllipseShape(0, sma);
-		orbitalElements.SetOrbitalPlane(70, (360 / num_planes) * i);
-		orbitalElements.SetEllipseOrientation(0);
+		if (mode == 1)
+		{
+			orbitalElements.SetEllipseShape(0, sma);
+			orbitalElements.SetOrbitalPlane(70, (360 / num_planes)* i);
+			orbitalElements.SetEllipseOrientation(0);
+		}
+		else
+		{
+			orbitalElements.SetEllipseShape(Ecc[i], Sma[i]);
+			orbitalElements.SetOrbitalPlane(Inc[i], Lta[i]);
+			orbitalElements.SetEllipseOrientation(Ltp[i]);
+		}
 		KeplerOrbits::OrbitBody orbitalBody = KeplerOrbits::OrbitBody(i, orbitalElements, orbitalElements.GetOrbitPeriod());
 		if(planes.size()==0)
 			planes.push_back(orbitalBody);

@@ -141,7 +141,6 @@
   <ItemGroup>
     <ClCompile Include="Constellation.cpp" />
     <ClCompile Include="DelaySimulation.cpp" />
-    <ClCompile Include="GlutUI.cpp" />
     <ClCompile Include="KeplerOrbits\CoordinateSystems.cpp" />
     <ClCompile Include="KeplerOrbits\OrbitalElements.cpp" />
     <ClCompile Include="KeplerOrbits\OrbitBody.cpp" />
@@ -149,13 +148,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Allinclude.h" />
-    <ClInclude Include="AstroLib.h" />
     <ClInclude Include="Constellation.h" />
     <ClInclude Include="DelaySimulation.h" />
-    <ClInclude Include="GlutUI.h" />
     <ClInclude Include="KeplerOrbits\CoordinateSystems.h" />
     <ClInclude Include="KeplerOrbits\OrbitalElements.h" />
     <ClInclude Include="KeplerOrbits\OrbitBody.h" />
+    <ClInclude Include="LEOSimulation.h" />
     <ClInclude Include="OpenGL\glut.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

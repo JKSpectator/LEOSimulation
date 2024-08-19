@@ -22,8 +22,7 @@ double Communication::random_in_range(double a, double b)
 
 Communication::Communication(const std::string& configfile)
 	: delay_normal(0), delay_no_noisy(0), delay_ideal(0),
-	bandwidth(0), is_attacked(false), attack_probability(0),
-	velocity(3e8), packet_size(12000), noisy(0),
+	bandwidth(0),velocity(3e8), packet_size(12000), noisy(0),
 	distribution_left(0), distribution_right(1), generator(std::random_device{}())
 {
 	std::ifstream config(configfile);
@@ -100,7 +99,7 @@ Communication::Communication(const std::string& configfile)
 	config.close();
 }
 
-double Communication::communication_stt(vector<int> distance, vector<int> stationState, int packet_size, int bandwidth, bool is_attacked, bool add_delay)
+double Communication::communication_stt(vector<int> distance, vector<int> stationState, int packet_size, int bandwidth, bool add_delay)
 {
 	if (packet_size == 0) {
 		packet_size = this->packet_size;
