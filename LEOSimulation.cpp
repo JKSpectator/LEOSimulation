@@ -138,7 +138,7 @@ void LoadTextures(GLuint texture_id, int MaxNrofTextures)
 	}
 }
 
-void drawSatellite(Vec3 _p, bool enabled = true)
+void drawSatellite(Vec3 _p, bool enabled)
 {
 	glPushMatrix();
 
@@ -318,6 +318,21 @@ void drawAttack(Vec3 _p)
 	glColor3f(1.0f, 1.0f, 1.0f);
 }
 
+void drawAttackSphere()
+{
+	glPushMatrix();
+	glPointSize(5);
+	glColor4f(1, 0, 0, 0.5);
+	glTranslatef(attack.x, attack.y, attack.z);
+	GLUquadricObj* quad = gluNewQuadric();
+	gluQuadricDrawStyle(quad, GLU_POINT);
+	gluQuadricNormals(quad, GLU_SMOOTH);
+	gluSphere(quad, 20000, 50, 50);
+	gluDeleteQuadric(quad);
+	glPopMatrix();
+	glColor4f(1, 1, 1, 1);
+}
+
 void drawEarth3D(float r)
 {
 	glBindTexture(GL_TEXTURE_2D, 1);
@@ -328,7 +343,7 @@ void drawEarth3D(float r)
 	gluQuadricNormals(sphere, GLU_SMOOTH);
 	gluQuadricTexture(sphere, GL_TRUE);
 	gluSphere(sphere, r, 100, 100);
-
+	gluDeleteQuadric(sphere);
 	glPopMatrix();
 }
 
@@ -427,6 +442,7 @@ void display()
 	glPushMatrix();
 
 	drawEarth3D(earthR);//draw earth
+	//drawAttackSphere();
 	for (int i = 0; i < satellitesE.size(); i++)
 		drawSatellite(satellitesE[i], true);// load satellite
 	for (int i = 0; i < satellitesD.size(); i++)

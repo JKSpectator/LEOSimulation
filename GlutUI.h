@@ -52,9 +52,11 @@ void LoadTextures(GLuint* texture_id, int MaxNrofTextures);
 
 Vec3 calSatellitePosition(float r);
 
-void drawSatellite(Vec3 _p);
+void drawSatellite(Vec3 _p, bool enabled = true);
 
 void drawGround(Vec3 _p);
+
+void drawAttackSphere();
 
 void drawEarth3D(float r);
 
