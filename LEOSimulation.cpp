@@ -5,6 +5,32 @@
 
 Constellation cs;
 Communication comm;
+#if defined(_WIN64)
+
+int main(int argc, char* argv[])
+{
+	cs = Constellation();
+	comm = Communication();
+	cs.attack[0].SetLatAndLon(comm.attack.latitude(), comm.attack.longitude());
+	cs.attack[0].x = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[0];
+	cs.attack[0].y = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[1];
+	cs.attack[0].z = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[2];
+	cs.AddGroundSandT(comm.source, comm.target);
+
+	while (true)
+	{
+		cs.updateSatellites();
+		if (cs.pathId.size() != 0)
+		{
+			cout << "通信延迟：" << comm.communication_stt(cs.pathDistance, cs.pathState) << endl;
+			cout << "无噪声通信延迟：" << comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState) << endl;
+			cout << "最理想通信延迟：" << comm.communication_stt_ideal(cs.pathDistance) << endl;
+		}
+	}
+	return 0;
+}
+#elif defined(_WIN32)
+
 GLuint texture_id;
 GLfloat aspect = 1.0;//可视化窗口分辨率
 vector<Vec3> linkS;//可通信链接起始点
@@ -605,3 +631,10 @@ int main(int argc, char* argv[])
 	beginWindow();
 	return 0;
 }
+#else
+int main(int argc, char* argv[])
+{
+	cout << Hello World << endl;
+	return 0;
+}
+#endif

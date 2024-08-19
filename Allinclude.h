@@ -8,7 +8,6 @@
 #include <random>
 #include <cmath>
 #include <vector>
-#include "OpenGL/glut.h"
 #include "KeplerOrbits/OrbitalElements.h"
 #include "KeplerOrbits/CoordinateSystems.h"
 #include "KeplerOrbits/OrbitBody.h"

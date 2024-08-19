@@ -1,6 +1,7 @@
 #pragma once
 #include "Allinclude.h"
 #include "Constellation.h"
+
 #define aa  6.378137e4 //6371000
 #define f  (1 / 298.257223563)	//扁率
 #define e2  (f*(2-f))			//第一偏心率平方
@@ -30,6 +31,11 @@ struct Vec3
 	}
 	double x, y, z;
 };
+
+#if defined(_WIN64)
+//Glut库要求32位
+#elif defined(_WIN32)
+#include "OpenGL/glut.h"
 
 /// <summary>
 /// 数据部分---添加陆地节点
@@ -170,3 +176,6 @@ int test(int argc, char* argv[]);
 /// 可视化部分---开始绘制可视化窗口
 /// </summary>
 void beginWindow();
+#else
+
+#endif
