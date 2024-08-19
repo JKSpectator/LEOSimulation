@@ -2,8 +2,6 @@
 
 long long map[MAX_SATALLITE_NUM][MAX_SATALLITE_NUM];  //邻接矩阵存储 
 int path[MAX_SATALLITE_NUM][MAX_SATALLITE_NUM]; //路径矩阵
-int dist[MAX_SATALLITE_NUM];      //d[i]表示起点到i这个点的距离 
-int visit[MAX_SATALLITE_NUM];  //节点是否被访问 
 int n;
 
 std::random_device rd;
@@ -433,50 +431,4 @@ int floyd(int from, int to) { //从起点到目标点
 	}
 
 	return map[from][to];
-}
-
-// 求最短路径
-int dijkstra(int from, int to) { //从起点到目标点 
-
-	int i, j;
-
-	// 起点为已访问状态
-	visit[from] = 1;
-
-	// 初始化dist
-	for (i = 1; i <= n; i++) {
-		visit[i] = 0;   //一开始每个点都没被访问 
-		dist[i] = map[from][i];  //起点到其他点的距离 
-	}
-
-	// N 个顶点需要做 N - 1 次循环
-	for (i = 1; i < n; ++i) {
-
-		//对除起点的每一个点进行最短计算 
-		int min = INT_MAX;  //记录最小dist[i] 
-
-		int pos;
-
-		// 循环遍历所有顶点
-		for (j = 1; j <= n; ++j) {
-
-			//记录最小dist[i]的点 
-			if (!visit[j] && min > dist[j]) {
-				pos = j;
-				min = dist[j];
-			}
-		}
-
-		// 将顶点放入S中
-		visit[pos] = 1;
-
-		// 更新dist
-		for (j = 1; j <= n; ++j) {
-			if (!visit[j] && (dist[j] > (dist[pos] + map[pos][j]))) { //如果j节点没有被访问过&&j节点到起节点的最短路径>pos节点到起节点的最短路径+pos节点到j节点的路径  
-				dist[j] = dist[pos] + map[pos][j];    //更新j节点到起节点的最短路径    
-			}
-		}
-	}
-
-	return dist[to];
 }
