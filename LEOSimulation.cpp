@@ -2,6 +2,7 @@
 #include "DelaySimulation.h"
 #include "LEOSimulation.h"
 #include "Constellation.h"
+#include "ShareMemory.h"
 
 Constellation cs;
 Communication comm;
@@ -9,6 +10,20 @@ Communication comm;
 
 int main(int argc, char* argv[])
 {
+	SYSTEMTIME sys_time;
+	LPVOID pBuffer;
+	string strMapName("global_share_memory");
+	HANDLE hMap = NULL;
+
+	hMap = OpenFileMapping(FILE_MAP_ALL_ACCESS, 0, L"global_share_memory");
+	if (hMap == NULL) {
+		cout << "no memorymap,i will creat a new one" << endl;
+		hMap = CreateFileMapping(NULL, NULL, PAGE_READWRITE, 0, 0X1000, L"global_share_memory");
+	}
+
+	pBuffer = MapViewOfFile(hMap, FILE_MAP_ALL_ACCESS, 0, 0, 0);
+	vector<double> start;
+
 	cs = Constellation();
 	comm = Communication();
 	cs.attack[0].SetLatAndLon(comm.attack.latitude(), comm.attack.longitude());
@@ -22,11 +37,19 @@ int main(int argc, char* argv[])
 		cs.updateSatellites();
 		if (cs.pathId.size() != 0)
 		{
-			cout << "通信延迟：" << comm.communication_stt(cs.pathDistance, cs.pathState) << endl;
-			cout << "无噪声通信延迟：" << comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState) << endl;
-			cout << "最理想通信延迟：" << comm.communication_stt_ideal(cs.pathDistance) << endl;
+			start.clear();
+			cout << "测试延迟并发送" << endl;
+			//cout << "通信延迟：" << comm.communication_stt(cs.pathDistance, cs.pathState) << endl;
+			start.push_back(comm.communication_stt(cs.pathDistance, cs.pathState));
+			//cout << "无噪声通信延迟：" << comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState) << endl;
+			start.push_back(comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState));
+			//cout << "最理想通信延迟：" << comm.communication_stt_ideal(cs.pathDistance) << endl;
+			start.push_back(comm.communication_stt_ideal(cs.pathDistance));
+			memcpy((double*)pBuffer, &start[0], sizeof(start));
 		}
 	}
+	UnmapViewOfFile(pBuffer);
+	CloseHandle(hMap);
 	return 0;
 }
 #elif defined(_WIN32)

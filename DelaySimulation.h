@@ -55,7 +55,7 @@ public:
 	/// <param name="bandwidth">带宽</param>
 	/// <param name="add_delay">是否记录时延</param>
 	/// <returns>时延</returns>
-	double communication_stt(vector<int> distance, vector<int> stationState, int packet_size = 0, int bandwidth = -1, bool add_delay = true);
+	double communication_stt(vector<int> distance, vector<int> stationState, int packet_size = 0, int bandwidth = -1, bool add_delay = false);
 
 	/// <summary>
 	/// 获取无噪声模拟的通信时延
@@ -66,7 +66,7 @@ public:
 	/// <param name="bandwidth">带宽</param>
 	/// <param name="add_delay">是否记录时延</param>
 	/// <returns>无噪声时延</returns>
-	double communication_stt_no_noisy(vector<int> distance, vector<int> stationState, int packet_size = 0, int bandwidth = -1, bool add_delay = true);
+	double communication_stt_no_noisy(vector<int> distance, vector<int> stationState, int packet_size = 0, int bandwidth = -1, bool add_delay = false);
 
 	/// <summary>
 	/// 获取理想情况模拟的通信时延
@@ -74,5 +74,5 @@ public:
 	/// <param name="distance">距离数组</param>
 	/// <param name="add_delay">是否记录时延</param>
 	/// <returns>时延</returns>
-	double communication_stt_ideal(vector<int> distance, bool add_delay = true);
+	double communication_stt_ideal(vector<int> distance, bool add_delay = false);
 };

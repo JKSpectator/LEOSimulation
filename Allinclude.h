@@ -12,4 +12,8 @@
 #include "KeplerOrbits/CoordinateSystems.h"
 #include "KeplerOrbits/OrbitBody.h"
 #include <functional>
+
+#include<Windows.h>
+#include<ctime>
+#include<time.h>
 using namespace std;

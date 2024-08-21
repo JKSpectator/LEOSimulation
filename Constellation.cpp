@@ -267,6 +267,7 @@ void Constellation::updateSatellites()
 	edistance.clear();
 	pathId.clear();
 	pathDistance.clear();
+	pathState.clear();
 	int s_id = 0;
 	for (int i = 0; i < num_planes; i++)
 	{

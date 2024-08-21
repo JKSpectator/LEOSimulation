@@ -1,7 +1,6 @@
 #pragma once
 #include "Allinclude.h"
 #include "Constellation.h"
-
 #define aa  6.378137e4 //6371000
 #define f  (1 / 298.257223563)	//扁率
 #define e2  (f*(2-f))			//第一偏心率平方
