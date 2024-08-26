@@ -88,6 +88,11 @@ double OrbitalElements::GetInclination() const
 	return m_inclination;
 }
 
+double OrbitalElements::GetSemimajorAxis() const
+{
+	return m_semimajorAxis;
+}
+
 double OrbitalElements::GetOrbitPeriod()
 {
 	double a = pow(m_semimajorAxis, 3) / STD_GRAVITATIONAL_PARAMATER_EARTH;

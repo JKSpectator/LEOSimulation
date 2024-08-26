@@ -35,6 +35,8 @@ namespace KeplerOrbits
 
 		int GetID() const;
 
+		double GetSma() const;
+
 		/// <summary>
 		/// 计算并返回天体的轨迹。轨迹是一系列CartesianCoordinates，表示天体在不同时间点的位置
 		/// </summary>

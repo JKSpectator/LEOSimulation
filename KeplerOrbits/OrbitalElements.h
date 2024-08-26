@@ -91,6 +91,12 @@ namespace KeplerOrbits
 		/// <returns>天体的轨道周期</returns>
 		double GetOrbitPeriod();
 
+		/// <summary>
+		/// 返回天体轨道的长半轴
+		/// </summary>
+		/// <returns>天体轨道的长半轴</returns>
+		double GetSemimajorAxis() const;
+
 	private:
 		//偏心率
 		double m_eccentricity;

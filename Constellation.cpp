@@ -77,7 +77,7 @@ Constellation::Constellation(const string& datafile, const string& configfile)
 	}
 	data.close();
 	//卫星信息
-	int mode = 1;//Mode=1自动生成轨道，Mode=2手动设置轨道参数
+	mode = 1;//Mode=1自动生成轨道，Mode=2手动设置轨道参数
 	vector<double> Ecc;
 	vector<double> Sma;
 	vector<double> Inc;
@@ -220,11 +220,19 @@ Constellation::Constellation(const string& datafile, const string& configfile)
 			}
 		}
 	}
-	double max_distance = calculateMaxSpaceToGndDistance();
+	double max_distance = 0;
 	for (int i = 0; i < 2; i++)
 	{
 		for (int j = 0; j < satellites.size(); j++)
 		{
+			if (mode == 1)
+			{
+				max_distance = calculateMaxSpaceToGndDistance();
+			}
+			else
+			{
+				max_distance = calculateMaxSpaceToGndDistance(90, planes[j / num_nodes_per_plane].GetSma());
+			}
 			double d = sqrt(pow(satellites[j].x - grounds[i].x, 2) + pow(satellites[j].y - grounds[i].y, 2) + pow(satellites[j].z - grounds[i].z, 2));
 			if ((int)d < (int)max_distance)
 			{
@@ -328,14 +336,21 @@ void Constellation::updateSatellites()
 		}
 	}
 	//计算地面站与卫星可能的连接
-	double max_distance = calculateMaxSpaceToGndDistance();
+	double max_distance = 0;
 	for (int i = 0; i < 2; i++)
 	{
 		for (int j = 0; j < satellites.size(); j++)
 		{
 			satellites[j].enabled = 0;
 			double d = sqrt(pow(satellites[j].x - grounds[i].x, 2) + pow(satellites[j].y - grounds[i].y, 2) + pow(satellites[j].z - grounds[i].z, 2));
-			//cout << d << endl;
+			if (mode == 1)
+			{
+				max_distance = calculateMaxSpaceToGndDistance();
+			}
+			else
+			{
+				max_distance = calculateMaxSpaceToGndDistance(90, planes[j / num_nodes_per_plane].GetSma());
+			}
 			if ((int)d < (int)max_distance)
 			{
 				if (i == 0)
@@ -354,7 +369,14 @@ void Constellation::updateSatellites()
 	for (int j = 0; j < satellites.size() && attack.size()>0; j++)
 	{
 		double d = sqrt(pow(satellites[j].x - attack[0].x, 2) + pow(satellites[j].y - attack[0].y, 2) + pow(satellites[j].z - attack[0].z, 2));
-		//cout << d << endl;
+		if (mode == 1)
+		{
+			max_distance = calculateMaxSpaceToGndDistance();
+		}
+		else
+		{
+			max_distance = calculateMaxSpaceToGndDistance(90, planes[j / num_nodes_per_plane].GetSma());
+		}
 		if ((int)d < (int)max_distance)
 		{
 			satellites[j].enabled = dis(gen) < DISABLED_NUM ? 2 : 1;
@@ -364,10 +386,12 @@ void Constellation::updateSatellites()
 		shortestPathByFloyd();
 }
 
-double Constellation::calculateMaxSpaceToGndDistance(double max_deg)
+double Constellation::calculateMaxSpaceToGndDistance(double max_deg, double m_sma)
 {
+	if (m_sma == -1)
+		m_sma = sma;
 	max_deg *= (M_PI / 180);
-	return sqrt(pow(sma, 2) - pow(earth_radius * sin(max_deg), 2)) - earth_radius * cos(max_deg);
+	return sqrt(pow(m_sma, 2) - pow(earth_radius * sin(max_deg), 2)) - earth_radius * cos(max_deg);
 }
 
 double Constellation::calculateMaxISLDistance(int min_communication_altitude)
