@@ -14,6 +14,35 @@
 >1. glut32.dll放置于LEOSimulation.cpp即main函数文件同级目录
 >2. 配置项目属性：C/C++——附加包含目录为OpenGL的文件夹
 >3. 配置项目属性：链接器——附加库目录为OpenGL文件夹
+### 代码示例解析
+1. 模拟器初始化
+```c++
+Constellation cs;
+Communication comm;
+
+void SInit()
+{
+	cs = Constellation();
+	comm = Communication();
+	cs.attack[0].SetLatAndLon(comm.attack.latitude(), comm.attack.longitude());
+	cs.attack[0].x = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[0];
+	cs.attack[0].y = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[1];
+	cs.attack[0].z = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[2];
+	cs.AddGroundSandT(comm.source, comm.target);
+}
+```
+2. 获取模拟延时
+```c++
+//更新卫星数据
+cs.updateSatellites();
+//判断是否找到可行通信路径
+if (cs.pathId.size() != 0)
+{
+	cout << "通信延迟：" << comm.communication_stt(cs.pathDistance, cs.pathState) << endl;
+	cout << "无噪声通信延迟：" << comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState) << endl;
+	cout << "最理想通信延迟：" << comm.communication_stt_ideal(cs.pathDistance) << endl;
+}
+```
 ### 文件目录解析
 1. ConfigTxt文件夹——存储配置文件
 2. KeplerOrbits文件夹——轨道计算辅助代码文件

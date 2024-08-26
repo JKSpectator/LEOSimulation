@@ -24,7 +24,9 @@ int main(int argc, char* argv[])
 
 	while (true)
 	{
+		//更新卫星数据
 		cs.updateSatellites();
+		//判断是否找到可行通信路径
 		if (cs.pathId.size() != 0)
 		{
 			cout << "通信延迟：" << comm.communication_stt(cs.pathDistance, cs.pathState) << endl;
