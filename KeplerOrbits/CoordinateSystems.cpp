@@ -1,4 +1,4 @@
-#define _USE_MATH_DEFINES
+ï»¿#define _USE_MATH_DEFINES
 
 #include "CoordinateSystems.h"
 #include "OrbitalElements.h"
@@ -144,13 +144,13 @@ GeoCoordinates::GeoCoordinates(double latitude, double longitude, double height)
 
 GeoCoordinates::operator CartesianCoordinates() const
 {
-	double lon = m_longitude * M_PI/180;      //¾­¶È
+	double lon = m_longitude * M_PI/180;      //ç»åº¦
 	double lat = m_latitude * M_PI / 180;
 	double hei = m_height;
 
 	// variable
-	double a = 6378137.0;       //µØÇò³àµÀ°ë¾¶ £¬µ¥Î»ÊÇ m
-	double b = 6356752.31424518;    //µØÇò¶Ì°ëÖá £¬µ¥Î»ÊÇ m
+	double a = 6378137.0;       //åœ°çƒèµ¤é“åŠå¾„ ï¼Œå•ä½æ˜¯ m
+	double b = 6356752.31424518;    //åœ°çƒçŸ­åŠè½´ ï¼Œå•ä½æ˜¯ m
 	double N = a / (sqrt(1 - ((a * a - b * b) / (a * a)) * sin(lat) * sin(lat)));
 
 	return CartesianCoordinates((N + hei) * cos(lat) * cos(lon), (N + hei) * cos(lat) * sin(lon), ((b * b * N) / (a * a) + hei) * sin(lat));

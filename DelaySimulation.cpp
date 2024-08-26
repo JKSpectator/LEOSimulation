@@ -1,4 +1,4 @@
-#include "DelaySimulation.h"
+﻿#include "DelaySimulation.h"
 
 
 double Communication::generate_gauss_in_range(double a, double b) 

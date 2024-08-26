@@ -1,13 +1,13 @@
-#include "Constellation.h"
+ï»¿#include "Constellation.h"
 
-long long map[MAX_SATALLITE_NUM][MAX_SATALLITE_NUM];  //ÁÚ½Ó¾ØÕó´æ´¢ 
-int path[MAX_SATALLITE_NUM][MAX_SATALLITE_NUM]; //Â·¾¶¾ØÕó
+long long map[MAX_SATALLITE_NUM][MAX_SATALLITE_NUM];  //é‚»æ¥çŸ©é˜µå­˜å‚¨ 
+int path[MAX_SATALLITE_NUM][MAX_SATALLITE_NUM]; //è·¯å¾„çŸ©é˜µ
 int n;
 
 std::random_device rd;
 std::mt19937 gen(rd());
 
-// ¶¨Òå·Ö²¼
+// å®šä¹‰åˆ†å¸ƒ
 std::uniform_int_distribution<> dis(0, 10);
 #define DISABLED_NUM 3
 
@@ -53,7 +53,7 @@ SatelliteStation::SatelliteStation(int ID, int pnum, int onum, double toffset, d
 Constellation::Constellation(const string& datafile, const string& configfile)
 {
 	attack.push_back(GroundStation(0, "null", 0, 0, 0, 0, 0));
-	//µØÃæÕ¾ĞÅÏ¢»ñÈ¡
+	//åœ°é¢ç«™ä¿¡æ¯è·å–
 	ifstream data(datafile);
 	int g_id = -1;
 	if (data.is_open())
@@ -76,8 +76,8 @@ Constellation::Constellation(const string& datafile, const string& configfile)
 		}
 	}
 	data.close();
-	//ÎÀĞÇĞÅÏ¢
-	int mode = 1;//Mode=1×Ô¶¯Éú³É¹ìµÀ£¬Mode=2ÊÖ¶¯ÉèÖÃ¹ìµÀ²ÎÊı
+	//å«æ˜Ÿä¿¡æ¯
+	int mode = 1;//Mode=1è‡ªåŠ¨ç”Ÿæˆè½¨é“ï¼ŒMode=2æ‰‹åŠ¨è®¾ç½®è½¨é“å‚æ•°
 	vector<double> Ecc;
 	vector<double> Sma;
 	vector<double> Inc;
@@ -154,7 +154,7 @@ Constellation::Constellation(const string& datafile, const string& configfile)
 		}
 	}
 	config.close();
-	//¸ù¾İÎÀĞÇĞÅÏ¢¼ÆËãÎÀĞÇµÄÎ»ÖÃĞÅÏ¢
+	//æ ¹æ®å«æ˜Ÿä¿¡æ¯è®¡ç®—å«æ˜Ÿçš„ä½ç½®ä¿¡æ¯
 	for (int i = 0; i < num_planes; i++)
 	{
 		KeplerOrbits::OrbitalElements orbitalElements;
@@ -305,7 +305,7 @@ void Constellation::updateSatellites()
 			}
 		}
 	}
-	//¼ÆËãÆ½Ãæ¹ìµÀ¼äÎÀĞÇµÄÍ¨ĞÅ
+	//è®¡ç®—å¹³é¢è½¨é“é—´å«æ˜Ÿçš„é€šä¿¡
 	int max_isl_range = calculateMaxISLDistance();
 	for (int i = 0; i < num_planes; i++)
 	{
@@ -327,7 +327,7 @@ void Constellation::updateSatellites()
 			}
 		}
 	}
-	//¼ÆËãµØÃæÕ¾ÓëÎÀĞÇ¿ÉÄÜµÄÁ¬½Ó
+	//è®¡ç®—åœ°é¢ç«™ä¸å«æ˜Ÿå¯èƒ½çš„è¿æ¥
 	double max_distance = calculateMaxSpaceToGndDistance();
 	for (int i = 0; i < 2; i++)
 	{
@@ -459,28 +459,28 @@ void Constellation::AddGroundSandT(KeplerOrbits::GeoCoordinates source, KeplerOr
 	grounds.insert(grounds.begin(), gsS);
 }
 
-// Çó×î¶ÌÂ·¾¶
-int floyd(int from, int to) { //´ÓÆğµãµ½Ä¿±êµã 
+// æ±‚æœ€çŸ­è·¯å¾„
+int floyd(int from, int to) { //ä»èµ·ç‚¹åˆ°ç›®æ ‡ç‚¹ 
 
 	int i, j, k;
 
-	// ÖĞ¼ä½Úµãk
+	// ä¸­é—´èŠ‚ç‚¹k
 	for (k = 0; k < n; k++) {
 
-		// Æğµãi
+		// èµ·ç‚¹i
 		for (i = 0; i < n; i++) {
 
-			// ÖÕµãj
+			// ç»ˆç‚¹j
 			for (j = 0; j < n; j++) {
 
 
-				// ¸üĞÂ¾àÀëºÍÂ·¾¶
+				// æ›´æ–°è·ç¦»å’Œè·¯å¾„
 				if (map[i][j] > (map[i][k] + map[k][j]) && i != j) {
 
-					// ¾àÀë
+					// è·ç¦»
 					map[i][j] = map[i][k] + map[k][j];
 
-					// Â·¾¶
+					// è·¯å¾„
 					path[i][j] = path[i][k];
 				}
 			}

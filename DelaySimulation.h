@@ -1,78 +1,78 @@
-#pragma once
+ï»¿#pragma once
 #include "Allinclude.h"
 /// <summary>
-/// Í¨ĞÅÑÓÊ±Ä£ÄâÀà
+/// é€šä¿¡å»¶æ—¶æ¨¡æ‹Ÿç±»
 /// </summary>
 class Communication
 {
 private:
-	double delay_normal;//´æ´¢Õı³£Ä£ÄâÏÂÍ¨ĞÅÑÓÊ±
-	double delay_no_noisy;//´æ´¢ÎŞÔëÉùÄ£ÄâÏÂµÄÍ¨ĞÅÑÓÊ±
-	double delay_ideal;//´æ´¢ÀíÏëÄ£ÄâÏÂµÄÍ¨ĞÅÑÓÊ±
-	int bandwidth;//´ø¿í
-	double velocity;//µç´Å²¨´«²¥ËÙ¶È
-	int packet_size;//°ü´óĞ¡
-	int noisy;//ÔëÉùÅäÖÃ£¬1£º¸ßË¹ÔëÉù£»2£º¾ùÔÈÔëÉù
-	double distribution_left;//ÔëÉùÇø¼ä×ó¶Ëµã
-	double distribution_right;//ÔëÉùÇø¼äÓÒ¶Ëµã
+	double delay_normal;//å­˜å‚¨æ­£å¸¸æ¨¡æ‹Ÿä¸‹é€šä¿¡å»¶æ—¶
+	double delay_no_noisy;//å­˜å‚¨æ— å™ªå£°æ¨¡æ‹Ÿä¸‹çš„é€šä¿¡å»¶æ—¶
+	double delay_ideal;//å­˜å‚¨ç†æƒ³æ¨¡æ‹Ÿä¸‹çš„é€šä¿¡å»¶æ—¶
+	int bandwidth;//å¸¦å®½
+	double velocity;//ç”µç£æ³¢ä¼ æ’­é€Ÿåº¦
+	int packet_size;//åŒ…å¤§å°
+	int noisy;//å™ªå£°é…ç½®ï¼Œ1ï¼šé«˜æ–¯å™ªå£°ï¼›2ï¼šå‡åŒ€å™ªå£°
+	double distribution_left;//å™ªå£°åŒºé—´å·¦ç«¯ç‚¹
+	double distribution_right;//å™ªå£°åŒºé—´å³ç«¯ç‚¹
 
-	//Î±Ëæ»úÊıÉú³ÉÆ÷£¬»ùÓÚ 19937 ¸öÔªËØµÄÖÜÆÚ£¬ÊÊÓÃÓÚÉú³É¸ßÖÊÁ¿µÄËæ»úÊı
+	//ä¼ªéšæœºæ•°ç”Ÿæˆå™¨ï¼ŒåŸºäº 19937 ä¸ªå…ƒç´ çš„å‘¨æœŸï¼Œé€‚ç”¨äºç”Ÿæˆé«˜è´¨é‡çš„éšæœºæ•°
 	mt19937 generator;
-	//normal_distribution ÊÇÓÃÀ´Éú³ÉÕıÌ¬·Ö²¼£¨¸ßË¹·Ö²¼£©Ëæ»úÊıµÄÄ£°åÀà
+	//normal_distribution æ˜¯ç”¨æ¥ç”Ÿæˆæ­£æ€åˆ†å¸ƒï¼ˆé«˜æ–¯åˆ†å¸ƒï¼‰éšæœºæ•°çš„æ¨¡æ¿ç±»
 	normal_distribution<double> gauss_distribution;
-	//uniform_real_distribution ÊÇÓÃÀ´Éú³ÉÔÚÖ¸¶¨·¶Î§ÄÚ¾ùÔÈ·Ö²¼µÄËæ»ú¸¡µãÊıµÄÄ£°åÀà
+	//uniform_real_distribution æ˜¯ç”¨æ¥ç”Ÿæˆåœ¨æŒ‡å®šèŒƒå›´å†…å‡åŒ€åˆ†å¸ƒçš„éšæœºæµ®ç‚¹æ•°çš„æ¨¡æ¿ç±»
 	uniform_real_distribution<double> uniform_distribution;
 
 	/// <summary>
-	/// °´ÕÕÇø¼äÉú³É¸ßË¹ÔëÉù
+	/// æŒ‰ç…§åŒºé—´ç”Ÿæˆé«˜æ–¯å™ªå£°
 	/// </summary>
-	/// <param name="a">×ó¶Ëµã</param>
-	/// <param name="b">ÓÒ¶Ëµã</param>
-	/// <returns>Éú³ÉµÄÔëÉù</returns>
+	/// <param name="a">å·¦ç«¯ç‚¹</param>
+	/// <param name="b">å³ç«¯ç‚¹</param>
+	/// <returns>ç”Ÿæˆçš„å™ªå£°</returns>
 	double generate_gauss_in_range(double a, double b);
 
 	/// <summary>
-	/// °´ÕÕÇø¼äÉú³É¾ùÔÈÔëÉù
+	/// æŒ‰ç…§åŒºé—´ç”Ÿæˆå‡åŒ€å™ªå£°
 	/// </summary>
-	/// <param name="a">×ó¶Ëµã</param>
-	/// <param name="b">ÓÒ¶Ëµã</param>
-	/// <returns>Éú³ÉµÄÔëÉù</returns>
+	/// <param name="a">å·¦ç«¯ç‚¹</param>
+	/// <param name="b">å³ç«¯ç‚¹</param>
+	/// <returns>ç”Ÿæˆçš„å™ªå£°</returns>
 	double random_in_range(double a, double b);
 
 public:
-	KeplerOrbits::GeoCoordinates source;//ĞÅÏ¢·¢ËÍ½Úµã
-	KeplerOrbits::GeoCoordinates target;//ĞÅÏ¢½ÓÊÕ½Úµã
-	KeplerOrbits::GeoCoordinates attack;//¹¥»÷½Úµã
+	KeplerOrbits::GeoCoordinates source;//ä¿¡æ¯å‘é€èŠ‚ç‚¹
+	KeplerOrbits::GeoCoordinates target;//ä¿¡æ¯æ¥æ”¶èŠ‚ç‚¹
+	KeplerOrbits::GeoCoordinates attack;//æ”»å‡»èŠ‚ç‚¹
 
 	Communication(const string& configfile = "ConfigTxt\\communication_config.txt");
 
 	/// <summary>
-	/// »ñÈ¡Ä£ÄâµÄÍ¨ĞÅÊ±ÑÓ
+	/// è·å–æ¨¡æ‹Ÿçš„é€šä¿¡æ—¶å»¶
 	/// </summary>
-	/// <param name="distance">¾àÀëÊı×é</param>
-	/// <param name="stationState">¸÷ÎÀĞÇ½ÚµãÊÜ¹¥»÷Çé¿ö</param>
-	/// <param name="packet_size">Êı¾İ°üµÄ´óĞ¡</param>
-	/// <param name="bandwidth">´ø¿í</param>
-	/// <param name="add_delay">ÊÇ·ñ¼ÇÂ¼Ê±ÑÓ</param>
-	/// <returns>Ê±ÑÓ</returns>
+	/// <param name="distance">è·ç¦»æ•°ç»„</param>
+	/// <param name="stationState">å„å«æ˜ŸèŠ‚ç‚¹å—æ”»å‡»æƒ…å†µ</param>
+	/// <param name="packet_size">æ•°æ®åŒ…çš„å¤§å°</param>
+	/// <param name="bandwidth">å¸¦å®½</param>
+	/// <param name="add_delay">æ˜¯å¦è®°å½•æ—¶å»¶</param>
+	/// <returns>æ—¶å»¶</returns>
 	double communication_stt(vector<int> distance, vector<int> stationState, int packet_size = 0, int bandwidth = -1, bool add_delay = false);
 
 	/// <summary>
-	/// »ñÈ¡ÎŞÔëÉùÄ£ÄâµÄÍ¨ĞÅÊ±ÑÓ
+	/// è·å–æ— å™ªå£°æ¨¡æ‹Ÿçš„é€šä¿¡æ—¶å»¶
 	/// </summary>
-	/// <param name="distance">¾àÀëÊı×é</param>
-	/// <param name="stationState">¸÷ÎÀĞÇ½ÚµãÊÜ¹¥»÷Çé¿ö</param>
-	/// <param name="packet_size">Êı¾İ°üµÄ´óĞ¡</param>
-	/// <param name="bandwidth">´ø¿í</param>
-	/// <param name="add_delay">ÊÇ·ñ¼ÇÂ¼Ê±ÑÓ</param>
-	/// <returns>ÎŞÔëÉùÊ±ÑÓ</returns>
+	/// <param name="distance">è·ç¦»æ•°ç»„</param>
+	/// <param name="stationState">å„å«æ˜ŸèŠ‚ç‚¹å—æ”»å‡»æƒ…å†µ</param>
+	/// <param name="packet_size">æ•°æ®åŒ…çš„å¤§å°</param>
+	/// <param name="bandwidth">å¸¦å®½</param>
+	/// <param name="add_delay">æ˜¯å¦è®°å½•æ—¶å»¶</param>
+	/// <returns>æ— å™ªå£°æ—¶å»¶</returns>
 	double communication_stt_no_noisy(vector<int> distance, vector<int> stationState, int packet_size = 0, int bandwidth = -1, bool add_delay = false);
 
 	/// <summary>
-	/// »ñÈ¡ÀíÏëÇé¿öÄ£ÄâµÄÍ¨ĞÅÊ±ÑÓ
+	/// è·å–ç†æƒ³æƒ…å†µæ¨¡æ‹Ÿçš„é€šä¿¡æ—¶å»¶
 	/// </summary>
-	/// <param name="distance">¾àÀëÊı×é</param>
-	/// <param name="add_delay">ÊÇ·ñ¼ÇÂ¼Ê±ÑÓ</param>
-	/// <returns>Ê±ÑÓ</returns>
+	/// <param name="distance">è·ç¦»æ•°ç»„</param>
+	/// <param name="add_delay">æ˜¯å¦è®°å½•æ—¶å»¶</param>
+	/// <returns>æ—¶å»¶</returns>
 	double communication_stt_ideal(vector<int> distance, bool add_delay = false);
 };

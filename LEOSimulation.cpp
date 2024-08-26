@@ -1,4 +1,4 @@
-#include "Allinclude.h"
+ï»¿#include "Allinclude.h"
 #include "DelaySimulation.h"
 #include "LEOSimulation.h"
 #include "Constellation.h"
@@ -27,9 +27,9 @@ int main(int argc, char* argv[])
 		cs.updateSatellites();
 		if (cs.pathId.size() != 0)
 		{
-			cout << "Í¨ĞÅÑÓ³Ù£º" << comm.communication_stt(cs.pathDistance, cs.pathState) << endl;
-			cout << "ÎŞÔëÉùÍ¨ĞÅÑÓ³Ù£º" << comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState) << endl;
-			cout << "×îÀíÏëÍ¨ĞÅÑÓ³Ù£º" << comm.communication_stt_ideal(cs.pathDistance) << endl;
+			cout << "é€šä¿¡å»¶è¿Ÿï¼š" << comm.communication_stt(cs.pathDistance, cs.pathState) << endl;
+			cout << "æ— å™ªå£°é€šä¿¡å»¶è¿Ÿï¼š" << comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState) << endl;
+			cout << "æœ€ç†æƒ³é€šä¿¡å»¶è¿Ÿï¼š" << comm.communication_stt_ideal(cs.pathDistance) << endl;
 		}
 	}
 	return 0;
@@ -37,18 +37,18 @@ int main(int argc, char* argv[])
 #elif defined(_WIN32)
 
 GLuint texture_id;
-GLfloat aspect = 1.0;//¿ÉÊÓ»¯´°¿Ú·Ö±æÂÊ
-vector<Vec3> linkS;//¿ÉÍ¨ĞÅÁ´½ÓÆğÊ¼µã
-vector<Vec3> linkT;//¿ÉÍ¨ĞÅÁ´½ÓÖÕµã
-vector<Vec3> linkSU;//ÕıÔÚÊ¹ÓÃµÄÍ¨ĞÅÁ´½ÓÆğÊ¼µã
-vector<Vec3> linkTU;//ÕıÔÚÊ¹ÓÃµÄÍ¨ĞÅÁ´½ÓÖÕµã
-Vec3 attack = Vec3(0, 0, 0);//µØÃæ¹¥»÷½Úµã
-vector<Vec3> grounds;//µØÃæÍ¨ĞÅ½Úµã
-vector<Vec3> satellitesE;//Ê¹ÄÜµÄÎÀĞÇ½Úµã
-vector<Vec3> satellitesD;//²»Ê¹ÄÜµÄÎÀĞÇ½Úµã
-string bmpfile = "OpenGL/2k_earth_daymap.bmp";//µØÍ¼ÎÄ¼ş
+GLfloat aspect = 1.0;//å¯è§†åŒ–çª—å£åˆ†è¾¨ç‡
+vector<Vec3> linkS;//å¯é€šä¿¡é“¾æ¥èµ·å§‹ç‚¹
+vector<Vec3> linkT;//å¯é€šä¿¡é“¾æ¥ç»ˆç‚¹
+vector<Vec3> linkSU;//æ­£åœ¨ä½¿ç”¨çš„é€šä¿¡é“¾æ¥èµ·å§‹ç‚¹
+vector<Vec3> linkTU;//æ­£åœ¨ä½¿ç”¨çš„é€šä¿¡é“¾æ¥ç»ˆç‚¹
+Vec3 attack = Vec3(0, 0, 0);//åœ°é¢æ”»å‡»èŠ‚ç‚¹
+vector<Vec3> grounds;//åœ°é¢é€šä¿¡èŠ‚ç‚¹
+vector<Vec3> satellitesE;//ä½¿èƒ½çš„å«æ˜ŸèŠ‚ç‚¹
+vector<Vec3> satellitesD;//ä¸ä½¿èƒ½çš„å«æ˜ŸèŠ‚ç‚¹
+string bmpfile = "OpenGL/2k_earth_daymap.bmp";//åœ°å›¾æ–‡ä»¶
 
-//¸¨ÖúÊÓ½Ç±ä»¯²ÎÊı
+//è¾…åŠ©è§†è§’å˜åŒ–å‚æ•°
 bool mouseLeftDown;
 float mouseX, mouseY;
 float cameraAngleX;
@@ -88,22 +88,22 @@ void AddLinkU(double xs, double ys, double zs, double xt, double yt, double zt)
 	linkTU.push_back(t);
 }
 
-//¾­Î³¶È×ª»»(»¡¶È)
+//ç»çº¬åº¦è½¬æ¢(å¼§åº¦)
 BLH XYZtoLB(double X, double Y, double Z)
 {
 	BLH res(0, 0, 0);
 	double B = 0.0, N = 0.0, H = 0.0, R0, R1, deltaH, deltaB;
 	R0 = sqrt(pow(X, 2) + pow(Y, 2));
 	R1 = sqrt(pow(X, 2) + pow(Y, 2) + pow(Z, 2));
-	//¾­¶ÈÖ±½ÓÇó½â
+	//ç»åº¦ç›´æ¥æ±‚è§£
 	res.L = atan2(Y, X);
-	//µü´úÇó´óµØÎ¬¶ÈºÍ´óµØ¸ß
+	//è¿­ä»£æ±‚å¤§åœ°ç»´åº¦å’Œå¤§åœ°é«˜
 	N = aa;
 	H = R1 - aa;
 	B = atan2(Z * (N + H), R0 * (N * (1 - e2) + H));
 	do
 	{
-		deltaH = N;//ÅĞ¶ÏÊÕÁ²ËùÓÃ
+		deltaH = N;//åˆ¤æ–­æ”¶æ•›æ‰€ç”¨
 		deltaB = B;
 		N = aa / sqrt(1 - e2 * pow(sin(B), 2));
 		H = R0 / cos(B) - N;
@@ -412,7 +412,7 @@ void drawLineUSing(float lineWidth)
 void display()
 {
 	glEnable(GL_DEPTH_TEST);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//Çå³ıÑÕÉ«»º´æÇøºÍÉî¶È»º³åÇø
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//æ¸…é™¤é¢œè‰²ç¼“å­˜åŒºå’Œæ·±åº¦ç¼“å†²åŒº
 
 	float earthR = aa;
 	glRotatef(cameraAngleX, 1, 0, 0);
@@ -487,9 +487,9 @@ void updateConstellation()
 	}
 	if (cs.pathId.size() != 0)
 	{
-		cout << "Í¨ĞÅÑÓ³Ù£º" << comm.communication_stt(cs.pathDistance, cs.pathState) << endl;
-		cout << "ÎŞÔëÉùÍ¨ĞÅÑÓ³Ù£º" << comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState) << endl;
-		cout << "×îÀíÏëÍ¨ĞÅÑÓ³Ù£º" << comm.communication_stt_ideal(cs.pathDistance) << endl;
+		cout << "é€šä¿¡å»¶è¿Ÿï¼š" << comm.communication_stt(cs.pathDistance, cs.pathState) << endl;
+		cout << "æ— å™ªå£°é€šä¿¡å»¶è¿Ÿï¼š" << comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState) << endl;
+		cout << "æœ€ç†æƒ³é€šä¿¡å»¶è¿Ÿï¼š" << comm.communication_stt_ideal(cs.pathDistance) << endl;
 	}
 }
 
@@ -497,11 +497,11 @@ void InitWindow(int argc, char* argv[], int width, int height, const char* title
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
-	glutInitWindowSize(width, height);//Ö¸¶¨´°¿Ú´óĞ¡
-	glutInitWindowPosition(100, 100);//Ö¸¶¨´°¿Ú×óÉÏ½ÇÎ»ÖÃ
-	glutCreateWindow(title);//´´½¨openGLäÖÈ¾´°¿Ú
+	glutInitWindowSize(width, height);//æŒ‡å®šçª—å£å¤§å°
+	glutInitWindowPosition(100, 100);//æŒ‡å®šçª—å£å·¦ä¸Šè§’ä½ç½®
+	glutCreateWindow(title);//åˆ›å»ºopenGLæ¸²æŸ“çª—å£
 
-	glClearColor(0, 0, 0, 1);//ÉèÖÃÇå³ıÑÕÉ«
+	glClearColor(0, 0, 0, 1);//è®¾ç½®æ¸…é™¤é¢œè‰²
 	glClearDepth(1.0f);
 	glDepthFunc(GL_LEQUAL);
 	glShadeModel(GL_SMOOTH);
@@ -537,7 +537,7 @@ void reshape(int w, int h)
 	lookat(1);
 }
 
-//Êó±êÊÂ¼ş
+//é¼ æ ‡äº‹ä»¶
 void MouseEvent(int button, int state, int x, int y)
 {
 	mouseX = x;
@@ -553,7 +553,7 @@ void MouseEvent(int button, int state, int x, int y)
 			mouseLeftDown = false;
 	}
 }
-//Êó±êÒÆ¶¯ÊÂ¼ş
+//é¼ æ ‡ç§»åŠ¨äº‹ä»¶
 void Motion(int x, int y)
 {
 	if (mouseLeftDown)
@@ -564,7 +564,7 @@ void Motion(int x, int y)
 		mouseY = y;
 	}
 
-	// ÇëÇóÖØĞÂ»æÖÆ³¡¾°
+	// è¯·æ±‚é‡æ–°ç»˜åˆ¶åœºæ™¯
 	glutPostRedisplay();
 }
 
@@ -575,14 +575,14 @@ void IdleEvent()
 
 void beginWindow()
 {
-	glutDisplayFunc(display);//Ìí¼ÓÏÔÊ¾»Øµ÷º¯Êı
+	glutDisplayFunc(display);//æ·»åŠ æ˜¾ç¤ºå›è°ƒå‡½æ•°
 
 	glutIdleFunc(IdleEvent);
 	glutReshapeFunc(reshape);
 
 	glutMouseFunc(MouseEvent);
 	glutMotionFunc(Motion);
-	glutMainLoop();//Æô¶¯³ÌĞò
+	glutMainLoop();//å¯åŠ¨ç¨‹åº
 }
 
 int test(int argc, char* argv[])
@@ -667,12 +667,12 @@ int main(int argc, char* argv[])
 		if (cs.pathId.size() != 0)
 		{
 			start.clear();
-			cout << "²âÊÔÑÓ³Ù²¢·¢ËÍ" << endl;
-			//cout << "Í¨ĞÅÑÓ³Ù£º" << comm.communication_stt(cs.pathDistance, cs.pathState) << endl;
+			cout << "æµ‹è¯•å»¶è¿Ÿå¹¶å‘é€" << endl;
+			//cout << "é€šä¿¡å»¶è¿Ÿï¼š" << comm.communication_stt(cs.pathDistance, cs.pathState) << endl;
 			start.push_back(comm.communication_stt(cs.pathDistance, cs.pathState));
-			//cout << "ÎŞÔëÉùÍ¨ĞÅÑÓ³Ù£º" << comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState) << endl;
+			//cout << "æ— å™ªå£°é€šä¿¡å»¶è¿Ÿï¼š" << comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState) << endl;
 			start.push_back(comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState));
-			//cout << "×îÀíÏëÍ¨ĞÅÑÓ³Ù£º" << comm.communication_stt_ideal(cs.pathDistance) << endl;
+			//cout << "æœ€ç†æƒ³é€šä¿¡å»¶è¿Ÿï¼š" << comm.communication_stt_ideal(cs.pathDistance) << endl;
 			start.push_back(comm.communication_stt_ideal(cs.pathDistance));
 			memcpy((double*)pBuffer, &start[0], sizeof(start));
 		}

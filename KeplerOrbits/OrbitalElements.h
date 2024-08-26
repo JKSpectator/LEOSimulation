@@ -1,110 +1,110 @@
-#pragma once
-//¹ìµÀÐÎ×´²ÎÊý
+ï»¿#pragma once
+//è½¨é“å½¢çŠ¶å‚æ•°
 namespace KeplerOrbits
 {
 	class OrbitalElements
 	{
 	public:
 		/// <summary>
-		/// ÉèÖÃÍÖÔ²¹ìµÀµÄÐÎ×´£¬ÆäÖÐÆ«ÐÄÂÊ¶¨ÒåÁË¹ìµÀµÄ±âÆ½³Ì¶È£¬°ë³¤ÖáÊÇ¹ìµÀ×î³¤Ö±¾¶µÄÒ»°ë
+		/// è®¾ç½®æ¤­åœ†è½¨é“çš„å½¢çŠ¶ï¼Œå…¶ä¸­åå¿ƒçŽ‡å®šä¹‰äº†è½¨é“çš„æ‰å¹³ç¨‹åº¦ï¼ŒåŠé•¿è½´æ˜¯è½¨é“æœ€é•¿ç›´å¾„çš„ä¸€åŠ
 		/// </summary>
-		/// <param name="eccentricity">Æ«ÐÄÂÊ</param>
-		/// <param name="semimajorAxis">³¤°ëÖá</param>
-		/// <returns>ÐÎ×´²ÎÊý</returns>
+		/// <param name="eccentricity">åå¿ƒçŽ‡</param>
+		/// <param name="semimajorAxis">é•¿åŠè½´</param>
+		/// <returns>å½¢çŠ¶å‚æ•°</returns>
 		OrbitalElements& SetEllipseShape(double eccentricity, double semimajorAxis);
 		/// <summary>
-		/// ÉèÖÃ¹ìµÀÆ½ÃæÏà¶ÔÓÚ²Î¿¼Æ½Ãæ£¨Í¨³£ÊÇµØÇò³àµÀÃæ£©µÄÇãÐ±ºÍÉý½»µãµÄÎ»ÖÃ
+		/// è®¾ç½®è½¨é“å¹³é¢ç›¸å¯¹äºŽå‚è€ƒå¹³é¢ï¼ˆé€šå¸¸æ˜¯åœ°çƒèµ¤é“é¢ï¼‰çš„å€¾æ–œå’Œå‡äº¤ç‚¹çš„ä½ç½®
 		/// </summary>
-		/// <param name="inclination">Çã½Ç</param>
-		/// <param name="longitudeOfAscendingNode">Éý½»µã»Æ¾­</param>
-		/// <returns>ÐÎ×´²ÎÊý</returns>
+		/// <param name="inclination">å€¾è§’</param>
+		/// <param name="longitudeOfAscendingNode">å‡äº¤ç‚¹é»„ç»</param>
+		/// <returns>å½¢çŠ¶å‚æ•°</returns>
 		OrbitalElements& SetOrbitalPlane(double inclination, double longitudeOfAscendingNode);
 		/// <summary>
-		/// ÉèÖÃÍÖÔ²¹ìµÀÉÏ½üµã£¨¹ìµÀÉÏÀëÖÐÐÄÌìÌå×î½üµÄµã£©µÄÎ»ÖÃ
+		/// è®¾ç½®æ¤­åœ†è½¨é“ä¸Šè¿‘ç‚¹ï¼ˆè½¨é“ä¸Šç¦»ä¸­å¿ƒå¤©ä½“æœ€è¿‘çš„ç‚¹ï¼‰çš„ä½ç½®
 		/// </summary>
-		/// <param name="longitudeOfPerihelion">½üµã»Æ¾­</param>
-		/// <returns>ÐÎ×´²ÎÊý</returns>
+		/// <param name="longitudeOfPerihelion">è¿‘ç‚¹é»„ç»</param>
+		/// <returns>å½¢çŠ¶å‚æ•°</returns>
 		OrbitalElements& SetEllipseOrientation(double longitudeOfPerihelion);
 		/// <summary>
-		/// ÉèÖÃÓëÊ±¼äÏà¹ØµÄ¹ìµÀÔªËØ£¬Æ½¾ù»Æ¾­ÊÇÌìÌåÔÚ²Î¿¼Ê±¼äµãµÄÆ½¾ùÎ»ÖÃ£¬²Î¿¼Ê±¼äµãÊÇÕâÐ©¹ìµÀÔªËØÓÐÐ§µÄÊ±¼ä
+		/// è®¾ç½®ä¸Žæ—¶é—´ç›¸å…³çš„è½¨é“å…ƒç´ ï¼Œå¹³å‡é»„ç»æ˜¯å¤©ä½“åœ¨å‚è€ƒæ—¶é—´ç‚¹çš„å¹³å‡ä½ç½®ï¼Œå‚è€ƒæ—¶é—´ç‚¹æ˜¯è¿™äº›è½¨é“å…ƒç´ æœ‰æ•ˆçš„æ—¶é—´
 		/// </summary>
-		/// <param name="meanLongitude">Æ½¾ù»Æ¾­</param>
-		/// <param name="epoch">²Î¿¼Ê±¼äµã£¬Í¨³£ÎªÈåÂÔÈÕ</param>
-		/// <returns>ÐÎ×´²ÎÊý</returns>
+		/// <param name="meanLongitude">å¹³å‡é»„ç»</param>
+		/// <param name="epoch">å‚è€ƒæ—¶é—´ç‚¹ï¼Œé€šå¸¸ä¸ºå„’ç•¥æ—¥</param>
+		/// <returns>å½¢çŠ¶å‚æ•°</returns>
 		OrbitalElements& SetTimeSpecific(double meanLongitude, double epoch);
 
 		/// <summary>
-		/// ¼ÆËã²¢·µ»ØÌìÌåµÄÆ½½üµã½Ç
+		/// è®¡ç®—å¹¶è¿”å›žå¤©ä½“çš„å¹³è¿‘ç‚¹è§’
 		/// </summary>
-		/// <returns>Æ½½üµã½Ç</returns>
+		/// <returns>å¹³è¿‘ç‚¹è§’</returns>
 		double GetMeanAnomaly() const;
 
 		/// <summary>
-		/// ¸ù¾ÝÊäÈëµÄÈåÂÔÈÕ£¨Julian Date£©¼ÆËã²¢·µ»ØÌìÌåÔÚ¸ÃÈÕÆÚµÄÕæÊµ½üµã½Ç£¨True Anomaly, ¦Í£©
+		/// æ ¹æ®è¾“å…¥çš„å„’ç•¥æ—¥ï¼ˆJulian Dateï¼‰è®¡ç®—å¹¶è¿”å›žå¤©ä½“åœ¨è¯¥æ—¥æœŸçš„çœŸå®žè¿‘ç‚¹è§’ï¼ˆTrue Anomaly, Î½ï¼‰
 		/// </summary>
-		/// <param name="jd">ÈåÂÔÈÕ</param>
-		/// <returns>ÕæÊµ½üµã½Ç</returns>
+		/// <param name="jd">å„’ç•¥æ—¥</param>
+		/// <returns>çœŸå®žè¿‘ç‚¹è§’</returns>
 		double GetTSE(double jd) const;
 
 		/// <summary>
-		/// ¸ù¾ÝÊäÈëµÄÆ½½üµã½Ç£¨Mean Anomaly£©£¬¼ÆËã²¢·µ»ØÌìÌåµÄÆ«½üµã½Ç£¨Eccentric Anomaly, E£©
+		/// æ ¹æ®è¾“å…¥çš„å¹³è¿‘ç‚¹è§’ï¼ˆMean Anomalyï¼‰ï¼Œè®¡ç®—å¹¶è¿”å›žå¤©ä½“çš„åè¿‘ç‚¹è§’ï¼ˆEccentric Anomaly, Eï¼‰
 		/// </summary>
-		/// <param name="m">Æ½½üµã½Ç</param>
-		/// <returns>Æ«½üµã½Ç</returns>
+		/// <param name="m">å¹³è¿‘ç‚¹è§’</param>
+		/// <returns>åè¿‘ç‚¹è§’</returns>
 		double GetEccentricAnomaly(double m) const;
 
 		/// <summary>
-		/// ¸ù¾ÝÊäÈëµÄÆ«½üµã½Ç£¨Eccentric Anomaly£©£¬¼ÆËã²¢·µ»ØÌìÌåÔÚ¹ìµÀÉÏµÄµ±Ç°°ë¾¶»ò¾àÀëÖÐÐÄÌìÌåµÄ¾àÀë
+		/// æ ¹æ®è¾“å…¥çš„åè¿‘ç‚¹è§’ï¼ˆEccentric Anomalyï¼‰ï¼Œè®¡ç®—å¹¶è¿”å›žå¤©ä½“åœ¨è½¨é“ä¸Šçš„å½“å‰åŠå¾„æˆ–è·ç¦»ä¸­å¿ƒå¤©ä½“çš„è·ç¦»
 		/// </summary>
-		/// <param name="eccentricAnomaly">Æ«½üµã½Ç</param>
-		/// <returns>¾àÀëÖÐÐÄÌìÌåµÄ¾àÀë</returns>
+		/// <param name="eccentricAnomaly">åè¿‘ç‚¹è§’</param>
+		/// <returns>è·ç¦»ä¸­å¿ƒå¤©ä½“çš„è·ç¦»</returns>
 		double GetRadius(double eccentricAnomaly) const;
 
 		/// <summary>
-		/// ¼ÆËã²¢·µ»ØÌìÌåµÄ½üµã·ù½Ç£¨Argument of Periapsis, ¦Ø£©£¬ÕâÊÇ´ÓÉý½»µãµ½½üµãµÄ½Ç¶È£¬ÊÇÃèÊö¹ìµÀÐÎ×´µÄÁíÒ»¸ö½Ç¶È²ÎÊý
+		/// è®¡ç®—å¹¶è¿”å›žå¤©ä½“çš„è¿‘ç‚¹å¹…è§’ï¼ˆArgument of Periapsis, Ï‰ï¼‰ï¼Œè¿™æ˜¯ä»Žå‡äº¤ç‚¹åˆ°è¿‘ç‚¹çš„è§’åº¦ï¼Œæ˜¯æè¿°è½¨é“å½¢çŠ¶çš„å¦ä¸€ä¸ªè§’åº¦å‚æ•°
 		/// </summary>
-		/// <returns>½üµã·ù½Ç</returns>
+		/// <returns>è¿‘ç‚¹å¹…è§’</returns>
 		double GetArgumentOfPeriapsis() const;
 
 		/// <summary>
-		/// ¸ù¾ÝÊäÈëµÄÆ«½üµã½Ç£¨Eccentric Anomaly£©£¬¼ÆËã²¢·µ»ØÌìÌåµÄÕæÊµ½üµã½Ç£¨True Anomaly, ¦Í£©¡£ÕæÊµ½üµã½ÇÊÇÌìÌåÔÚ¹ìµÀÉÏµÄÊµ¼ÊÎ»ÖÃ½Ç¶È£¬Ïà¶ÔÓÚ½üµã
+		/// æ ¹æ®è¾“å…¥çš„åè¿‘ç‚¹è§’ï¼ˆEccentric Anomalyï¼‰ï¼Œè®¡ç®—å¹¶è¿”å›žå¤©ä½“çš„çœŸå®žè¿‘ç‚¹è§’ï¼ˆTrue Anomaly, Î½ï¼‰ã€‚çœŸå®žè¿‘ç‚¹è§’æ˜¯å¤©ä½“åœ¨è½¨é“ä¸Šçš„å®žé™…ä½ç½®è§’åº¦ï¼Œç›¸å¯¹äºŽè¿‘ç‚¹
 		/// </summary>
-		/// <param name="eccentricAnomaly">Æ«½üµã½Ç</param>
-		/// <returns>ÕæÊµ½üµã½Ç</returns>
+		/// <param name="eccentricAnomaly">åè¿‘ç‚¹è§’</param>
+		/// <returns>çœŸå®žè¿‘ç‚¹è§’</returns>
 		double GetTrueAnomaly(double eccentricAnomaly) const;
 
 		/// <summary>
-		/// ¼ÆËã²¢·µ»ØÌìÌå¹ìµÀµÄÉý½»µã³à¾­£¨Longitude of the Ascending Node, ¦¸£©£¬ÕâÊÇ¹ìµÀÆ½ÃæÓë²Î¿¼Æ½Ãæ£¨³àµÀ£©Ïà½»µÄµãµÄ¾­¶È
+		/// è®¡ç®—å¹¶è¿”å›žå¤©ä½“è½¨é“çš„å‡äº¤ç‚¹èµ¤ç»ï¼ˆLongitude of the Ascending Node, Î©ï¼‰ï¼Œè¿™æ˜¯è½¨é“å¹³é¢ä¸Žå‚è€ƒå¹³é¢ï¼ˆèµ¤é“ï¼‰ç›¸äº¤çš„ç‚¹çš„ç»åº¦
 		/// </summary>
-		/// <returns>Éý½»µã³à¾­</returns>
+		/// <returns>å‡äº¤ç‚¹èµ¤ç»</returns>
 		double GetLongitudeOfAscendingNode() const;
 
 		/// <summary>
-		/// ·µ»ØÌìÌå¹ìµÀµÄÇã½Ç£¨Inclination, i£©£¬ÕâÊÇ¹ìµÀÆ½ÃæÏà¶ÔÓÚ²Î¿¼Æ½Ãæ£¨Èç³àµÀ»ò»ÆµÀ£©µÄÇãÐ±½Ç¶È
+		/// è¿”å›žå¤©ä½“è½¨é“çš„å€¾è§’ï¼ˆInclination, iï¼‰ï¼Œè¿™æ˜¯è½¨é“å¹³é¢ç›¸å¯¹äºŽå‚è€ƒå¹³é¢ï¼ˆå¦‚èµ¤é“æˆ–é»„é“ï¼‰çš„å€¾æ–œè§’åº¦
 		/// </summary>
-		/// <returns>ÌìÌå¹ìµÀµÄÇã½Ç</returns>
+		/// <returns>å¤©ä½“è½¨é“çš„å€¾è§’</returns>
 		double GetInclination() const;
 
 		/// <summary>
-		/// ¼ÆËã²¢·µ»ØÌìÌåµÄ¹ìµÀÖÜÆÚ£¨Orbit Period, T£©£¬ÕâÊÇÌìÌåÈÆÖÐÐÄÌìÌåÒ»ÖÜËùÐèµÄÊ±¼ä
+		/// è®¡ç®—å¹¶è¿”å›žå¤©ä½“çš„è½¨é“å‘¨æœŸï¼ˆOrbit Period, Tï¼‰ï¼Œè¿™æ˜¯å¤©ä½“ç»•ä¸­å¿ƒå¤©ä½“ä¸€å‘¨æ‰€éœ€çš„æ—¶é—´
 		/// </summary>
-		/// <returns>ÌìÌåµÄ¹ìµÀÖÜÆÚ</returns>
+		/// <returns>å¤©ä½“çš„è½¨é“å‘¨æœŸ</returns>
 		double GetOrbitPeriod();
 
 	private:
-		//Æ«ÐÄÂÊ
+		//åå¿ƒçŽ‡
 		double m_eccentricity;
-		//³¤°ëÖá
+		//é•¿åŠè½´
 		double m_semimajorAxis;
-		//Çã½Ç
+		//å€¾è§’
 		double m_inclination;
-		//Éý½»µã»Æ¾­
+		//å‡äº¤ç‚¹é»„ç»
 		double m_longitudeOfAscendingNode;
-		//½üµã»Æ¾­
+		//è¿‘ç‚¹é»„ç»
 		double m_longitudeOfPerihelion;
-		//Æ½¾ù»Æ¾­
+		//å¹³å‡é»„ç»
 		double m_meanLongitude;
-		//²Î¿¼Ê±¼äµã£¬Í¨³£ÎªÈåÂÔÈÕ
+		//å‚è€ƒæ—¶é—´ç‚¹ï¼Œé€šå¸¸ä¸ºå„’ç•¥æ—¥
 		double m_epoch;
 	};
 }

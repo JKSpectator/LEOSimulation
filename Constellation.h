@@ -1,20 +1,20 @@
-#pragma once
+ï»¿#pragma once
 #include "Allinclude.h"
-//Éè¶¨µÄÄ£ÄâÎÀĞÇµÄ×î¶àÊıÁ¿£¬¸ù¾İÄÚ´æ¸ü¸Ä
+//è®¾å®šçš„æ¨¡æ‹Ÿå«æ˜Ÿçš„æœ€å¤šæ•°é‡ï¼Œæ ¹æ®å†…å­˜æ›´æ”¹
 #define MAX_SATALLITE_NUM 225
-//×î¶ÌÂ·¾¶Ëã·¨Í¨ÓÃº¯Êı
+//æœ€çŸ­è·¯å¾„ç®—æ³•é€šç”¨å‡½æ•°
 int floyd(int from, int to);
 
 /// <summary>
-/// Â½µØ½ÚµãÀà
+/// é™†åœ°èŠ‚ç‚¹ç±»
 /// </summary>
 class GroundStation
 {
 private:
-	int id;//Â½µØ½ÚµãµÄidÈ¡¸ºÊı£¬´Ó-1¿ªÊ¼
+	int id;//é™†åœ°èŠ‚ç‚¹çš„idå–è´Ÿæ•°ï¼Œä»-1å¼€å§‹
 	string name;
-	double lat;//Î³¶È
-	double lon;//¾­¶È
+	double lat;//çº¬åº¦
+	double lon;//ç»åº¦
 public:
 	double x;
 	double y;
@@ -26,25 +26,25 @@ public:
 };
 
 /// <summary>
-/// ÎÀĞÇ½ÚµãÀà
+/// å«æ˜ŸèŠ‚ç‚¹ç±»
 /// </summary>
 class SatelliteStation
 {
 private:
-	int plane_num;//ÎÀĞÇËùÊô¹ìµÀÆ½Ãæ
-	int offset_num;//ÔÚ¹ìµÀÉÏµÄÆ«ÒÆ
-	double time_offset;//ÔÚkepler ellipse solverµÄÆ«ÒÆÁ¿
+	int plane_num;//å«æ˜Ÿæ‰€å±è½¨é“å¹³é¢
+	int offset_num;//åœ¨è½¨é“ä¸Šçš„åç§»
+	double time_offset;//åœ¨kepler ellipse solverçš„åç§»é‡
 public:
-	int id;//ÎÀĞÇ½ÚµãµÄidÈ¡ÕıÊı£¬´Ó0¿ªÊ¼
+	int id;//å«æ˜ŸèŠ‚ç‚¹çš„idå–æ­£æ•°ï¼Œä»0å¼€å§‹
 	double x;
 	double y;
 	double z;
-	int enabled;//0£ºÕı³££»1£º±»¹¥»÷£¬´ø¿í¼õĞ¡£»2£ºÌ±»¾
+	int enabled;//0ï¼šæ­£å¸¸ï¼›1ï¼šè¢«æ”»å‡»ï¼Œå¸¦å®½å‡å°ï¼›2ï¼šç˜«ç—ª
 	SatelliteStation(int ID = 0, int pnum = 0, int onum = 0, double toffset = 0, double X = 0, double Y = 0, double Z = 0, int enabledK = 0);
 };
 
 /// <summary>
-/// ÎÀĞÇ¿ÉÍ¨ĞÅÁ´½ÓÀà
+/// å«æ˜Ÿå¯é€šä¿¡é“¾æ¥ç±»
 /// </summary>
 class Link
 {
@@ -55,26 +55,26 @@ public:
 };
 
 /// <summary>
-/// LEOĞÇ×ùÊı¾İ´æ´¢Àà
+/// LEOæ˜Ÿåº§æ•°æ®å­˜å‚¨ç±»
 /// </summary>
 class Constellation
 {
 public:
-	double earth_radius = 6.378137e4;//µØÇò°ë¾¶
-	int num_planes;//ÎÀĞÇÆ½ÃæÊıÁ¿
-	int num_nodes_per_plane;//Ã¿¸öÆ½ÃæµÄÎÀĞÇÊıÁ¿
-	double sma;//³¤°ëÖá¾àÀë
+	double earth_radius = 6.378137e4;//åœ°çƒåŠå¾„
+	int num_planes;//å«æ˜Ÿå¹³é¢æ•°é‡
+	int num_nodes_per_plane;//æ¯ä¸ªå¹³é¢çš„å«æ˜Ÿæ•°é‡
+	double sma;//é•¿åŠè½´è·ç¦»
 	int m_time = 0;
-	vector<GroundStation> grounds;//µØÃæÕ¾Êı×é
-	vector<SatelliteStation> satellites;//ÎÀĞÇÊı×é
+	vector<GroundStation> grounds;//åœ°é¢ç«™æ•°ç»„
+	vector<SatelliteStation> satellites;//å«æ˜Ÿæ•°ç»„
 	vector<KeplerOrbits::OrbitBody> planes;
-	vector<Link> links;//Á´½ÓÊı×é
-	vector<GroundStation> attack;//¹¥»÷µØÃæÕ¾µã
-	vector<SatelliteStation> start;//ÓëÊı¾İÀ´Ô´µØÃæÕ¾Á¬½ÓµÄÎÀĞÇÊı×é
+	vector<Link> links;//é“¾æ¥æ•°ç»„
+	vector<GroundStation> attack;//æ”»å‡»åœ°é¢ç«™ç‚¹
+	vector<SatelliteStation> start;//ä¸æ•°æ®æ¥æºåœ°é¢ç«™è¿æ¥çš„å«æ˜Ÿæ•°ç»„
 	vector<double> sdistance;
-	vector<SatelliteStation> end;//ÓëÊı¾İ½ÓÊÕµØÃæÕ¾Á¬½ÓµÄÎÀĞÇÊı×é
+	vector<SatelliteStation> end;//ä¸æ•°æ®æ¥æ”¶åœ°é¢ç«™è¿æ¥çš„å«æ˜Ÿæ•°ç»„
 	vector<double> edistance;
-	vector<int> pathId;//·¢ËÍµ½½ÓÊÕ¾­¹ıµÄ½Úµã/
+	vector<int> pathId;//å‘é€åˆ°æ¥æ”¶ç»è¿‡çš„èŠ‚ç‚¹/
 	vector<int> pathState;
 	vector<int> pathDistance;
 	vector<KeplerOrbits::OrbitBody> orbits;

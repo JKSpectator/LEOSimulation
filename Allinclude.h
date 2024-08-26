@@ -1,5 +1,5 @@
-#pragma once
-//������Ŀ����Ҫ������ͷ�ļ������ڴ洢���ÿ�
+﻿#pragma once
+//所有项目都需要包含的头文件，用于存储公用库
 #define _USE_MATH_DEFINES
 #include <iostream>
 #include <fstream>

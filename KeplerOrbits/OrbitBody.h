@@ -1,58 +1,58 @@
-#pragma once
+ï»¿#pragma once
 #include "OrbitalElements.h"
 #include <string>
 #include <vector>
-//¹ìµÀÊı¾İÀà
+//è½¨é“æ•°æ®ç±»
 namespace KeplerOrbits
 {
 	class EulerCoordinates;
 	class CartesianCoordinates;
 
 
-	typedef std::vector<CartesianCoordinates> Trajectory;//ÌìÌåµÄ¹ì¼£
+	typedef std::vector<CartesianCoordinates> Trajectory;//å¤©ä½“çš„è½¨è¿¹
 
 	class OrbitBody
 	{
 	public:
-		//³õÊ¼»¯ÌìÌåµÄID¡¢¹ìµÀÔªËØºÍ¹ìµÀÖÜÆÚ
+		//åˆå§‹åŒ–å¤©ä½“çš„IDã€è½¨é“å…ƒç´ å’Œè½¨é“å‘¨æœŸ
 		OrbitBody(
 			int			id,
 			OrbitalElements&	orbitalElements,
 			double				siderealOrbitPeriod);
 
 		/// <summary>
-		/// ¸ù¾İ¸ø¶¨µÄÈåÂÔÈÕ(jd)£¬¼ÆËã²¢·µ»ØÌìÌåµÄÅ·À­½Ç
+		/// æ ¹æ®ç»™å®šçš„å„’ç•¥æ—¥(jd)ï¼Œè®¡ç®—å¹¶è¿”å›å¤©ä½“çš„æ¬§æ‹‰è§’
 		/// </summary>
-		/// <param name="jd">ÈåÂÔÈÕ</param>
-		/// <returns>ÌìÌåµÄÅ·À­½Ç</returns>
+		/// <param name="jd">å„’ç•¥æ—¥</param>
+		/// <returns>å¤©ä½“çš„æ¬§æ‹‰è§’</returns>
 		EulerCoordinates GetEulaerAnglesFromJulianDay(double jd) const;
 
 		/// <summary>
-		/// ·µ»ØÌìÌåµÄºãĞÇ¹ìµÀÖÜÆÚ£¬¼´ÌìÌåÈÆÆä¹ìµÀÖĞĞÄ£¨ÈçºãĞÇ£©Ğı×ªÒ»ÖÜËùĞèµÄÊ±¼ä
+		/// è¿”å›å¤©ä½“çš„æ’æ˜Ÿè½¨é“å‘¨æœŸï¼Œå³å¤©ä½“ç»•å…¶è½¨é“ä¸­å¿ƒï¼ˆå¦‚æ’æ˜Ÿï¼‰æ—‹è½¬ä¸€å‘¨æ‰€éœ€çš„æ—¶é—´
 		/// </summary>
-		/// <returns>ºãĞÇ¹ìµÀÖÜÆÚ</returns>
+		/// <returns>æ’æ˜Ÿè½¨é“å‘¨æœŸ</returns>
 		double GetSiderealOrbitPeriod() const;
 
 		int GetID() const;
 
 		/// <summary>
-		/// ¼ÆËã²¢·µ»ØÌìÌåµÄ¹ì¼£¡£¹ì¼£ÊÇÒ»ÏµÁĞCartesianCoordinates£¬±íÊ¾ÌìÌåÔÚ²»Í¬Ê±¼äµãµÄÎ»ÖÃ
+		/// è®¡ç®—å¹¶è¿”å›å¤©ä½“çš„è½¨è¿¹ã€‚è½¨è¿¹æ˜¯ä¸€ç³»åˆ—CartesianCoordinatesï¼Œè¡¨ç¤ºå¤©ä½“åœ¨ä¸åŒæ—¶é—´ç‚¹çš„ä½ç½®
 		/// </summary>
-		/// <param name="stepCount">²½Êı</param>
-		/// <param name="time_offset">Ê±¼äÆ«ÒÆ</param>
-		/// <returns>ÌìÌåµÄ¹ì¼£</returns>
+		/// <param name="stepCount">æ­¥æ•°</param>
+		/// <param name="time_offset">æ—¶é—´åç§»</param>
+		/// <returns>å¤©ä½“çš„è½¨è¿¹</returns>
 		Trajectory GetTrajectory(int stepCount, int time_offset = 0) const;
 		
 	private:
 		/// <summary>
-		/// ¸ù¾İ¸ø¶¨µÄÆ«½üµã½Ç(eccentricAnomaly)£¬¼ÆËã²¢·µ»ØÌìÌåµÄÅ·À­½Ç
+		/// æ ¹æ®ç»™å®šçš„åè¿‘ç‚¹è§’(eccentricAnomaly)ï¼Œè®¡ç®—å¹¶è¿”å›å¤©ä½“çš„æ¬§æ‹‰è§’
 		/// </summary>
-		/// <param name="eccentricAnomaly">Æ«½üµã½Ç</param>
-		/// <returns>ÌìÌåµÄÅ·À­½Ç</returns>
+		/// <param name="eccentricAnomaly">åè¿‘ç‚¹è§’</param>
+		/// <returns>å¤©ä½“çš„æ¬§æ‹‰è§’</returns>
 		EulerCoordinates GetEulaerAnglesFromEccentricAnomaly(double eccentricAnomaly) const;
 
-		OrbitalElements m_orbitalElements;//¹ìµÀÊôĞÔ
+		OrbitalElements m_orbitalElements;//è½¨é“å±æ€§
 		int m_id;
-		double m_siderealOrbitPeriod;//¹ìµÀÖÜÆÚ
+		double m_siderealOrbitPeriod;//è½¨é“å‘¨æœŸ
 	};
 }

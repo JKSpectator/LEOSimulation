@@ -1,8 +1,8 @@
-#include "OrbitalElements.h"
+ï»¿#include "OrbitalElements.h"
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <limits>
-double STD_GRAVITATIONAL_PARAMATER_EARTH = 3.986004418e14;//ÒýÁ¦³£Êý
+double STD_GRAVITATIONAL_PARAMATER_EARTH = 3.986004418e14;//å¼•åŠ›å¸¸æ•°
 using namespace KeplerOrbits;
 
 OrbitalElements& OrbitalElements::SetEllipseShape(double eccentricity, double semimajorAxis)

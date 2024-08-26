@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 #include "Allinclude.h"
 #include "Constellation.h"
 #define aa  6.378137e4 //6371000
-#define f  (1 / 298.257223563)	//±âÂÊ
-#define e2  (f*(2-f))			//µÚÒ»Æ«ĞÄÂÊÆ½·½
+#define f  (1 / 298.257223563)	//æ‰ç‡
+#define e2  (f*(2-f))			//ç¬¬ä¸€åå¿ƒç‡å¹³æ–¹
 
-//¾­Î³¶È
+//ç»çº¬åº¦
 struct BLH
 {
 	BLH(double b, double l, double h)
@@ -14,12 +14,12 @@ struct BLH
 		L = l;
 		H = h;
 	}
-	double B;//Î¬¶È
-	double L;//¾­¶È
-	double H;//¸ß
+	double B;//ç»´åº¦
+	double L;//ç»åº¦
+	double H;//é«˜
 };
 
-//XYZ×ø±ê
+//XYZåæ ‡
 struct Vec3
 {
 	Vec3(double x1, double y1, double z1)
@@ -32,152 +32,152 @@ struct Vec3
 };
 
 /// <summary>
-/// ³õÊ¼»¯ĞÇ×ùºÍÍ¨ĞÅÄ£ÄâÆ÷
+/// åˆå§‹åŒ–æ˜Ÿåº§å’Œé€šä¿¡æ¨¡æ‹Ÿå™¨
 /// </summary>
 void SInit();
 
 #if defined(_WIN64)
-//Glut¿âÒªÇó32Î»
+//Glutåº“è¦æ±‚32ä½
 #elif defined(_WIN32)
 #include "OpenGL/glut.h"
 
 /// <summary>
-/// Êı¾İ²¿·Ö---Ìí¼ÓÂ½µØ½Úµã
+/// æ•°æ®éƒ¨åˆ†---æ·»åŠ é™†åœ°èŠ‚ç‚¹
 /// </summary>
-/// <param name="x">ÊÀ½çX×ø±ê</param>
-/// <param name="y">ÊÀ½çY×ø±ê</param>
-/// <param name="z">ÊÀ½çZ×ø±ê</param>
+/// <param name="x">ä¸–ç•ŒXåæ ‡</param>
+/// <param name="y">ä¸–ç•ŒYåæ ‡</param>
+/// <param name="z">ä¸–ç•ŒZåæ ‡</param>
 void AddGround(double x, double y, double z);
 
 /// <summary>
-/// Êı¾İ²¿·Ö---Ìí¼ÓÊ¹ÄÜÎÀĞÇ½Úµã
+/// æ•°æ®éƒ¨åˆ†---æ·»åŠ ä½¿èƒ½å«æ˜ŸèŠ‚ç‚¹
 /// </summary>
-/// <param name="x">ÊÀ½çX×ø±ê</param>
-/// <param name="y">ÊÀ½çY×ø±ê</param>
-/// <param name="z">ÊÀ½çZ×ø±ê</param>
+/// <param name="x">ä¸–ç•ŒXåæ ‡</param>
+/// <param name="y">ä¸–ç•ŒYåæ ‡</param>
+/// <param name="z">ä¸–ç•ŒZåæ ‡</param>
 void AddSatelliteE(double x, double y, double z);
 
 /// <summary>
-/// Êı¾İ²¿·Ö---Ìí¼Ó²»Ê¹ÄÜÎÀĞÇ½Úµã
+/// æ•°æ®éƒ¨åˆ†---æ·»åŠ ä¸ä½¿èƒ½å«æ˜ŸèŠ‚ç‚¹
 /// </summary>
-/// <param name="x">ÊÀ½çX×ø±ê</param>
-/// <param name="y">ÊÀ½çY×ø±ê</param>
-/// <param name="z">ÊÀ½çZ×ø±ê</param>
+/// <param name="x">ä¸–ç•ŒXåæ ‡</param>
+/// <param name="y">ä¸–ç•ŒYåæ ‡</param>
+/// <param name="z">ä¸–ç•ŒZåæ ‡</param>
 void AddSatelliteD(double x, double y, double z);
 
 /// <summary>
-/// Êı¾İ²¿·Ö---Ìí¼ÓÍ¨ĞÅÁ´½Ó
+/// æ•°æ®éƒ¨åˆ†---æ·»åŠ é€šä¿¡é“¾æ¥
 /// </summary>
-/// <param name="xs">Ô´½ÚµãX×ø±ê</param>
-/// <param name="ys">Ô´½ÚµãY×ø±ê</param>
-/// <param name="zs">Ô´½ÚµãZ×ø±ê</param>
-/// <param name="xt">Ä¿±ê½ÚµãX×ø±ê</param>
-/// <param name="yt">Ä¿±ê½ÚµãY×ø±ê</param>
-/// <param name="zt">Ä¿±ê½ÚµãZ×ø±ê</param>
+/// <param name="xs">æºèŠ‚ç‚¹Xåæ ‡</param>
+/// <param name="ys">æºèŠ‚ç‚¹Yåæ ‡</param>
+/// <param name="zs">æºèŠ‚ç‚¹Zåæ ‡</param>
+/// <param name="xt">ç›®æ ‡èŠ‚ç‚¹Xåæ ‡</param>
+/// <param name="yt">ç›®æ ‡èŠ‚ç‚¹Yåæ ‡</param>
+/// <param name="zt">ç›®æ ‡èŠ‚ç‚¹Zåæ ‡</param>
 void AddLink(double xs, double ys, double zs, double xt, double yt, double zt);
 
 /// <summary>
-/// Êı¾İ²¿·Ö---Ìí¼ÓÊ¹ÓÃµÄÍ¨ĞÅÁ´½Ó
+/// æ•°æ®éƒ¨åˆ†---æ·»åŠ ä½¿ç”¨çš„é€šä¿¡é“¾æ¥
 /// </summary>
-/// <param name="xs">Ô´½ÚµãX×ø±ê</param>
-/// <param name="ys">Ô´½ÚµãY×ø±ê</param>
-/// <param name="zs">Ô´½ÚµãZ×ø±ê</param>
-/// <param name="xt">Ä¿±ê½ÚµãX×ø±ê</param>
-/// <param name="yt">Ä¿±ê½ÚµãY×ø±ê</param>
-/// <param name="zt">Ä¿±ê½ÚµãZ×ø±ê</param>
+/// <param name="xs">æºèŠ‚ç‚¹Xåæ ‡</param>
+/// <param name="ys">æºèŠ‚ç‚¹Yåæ ‡</param>
+/// <param name="zs">æºèŠ‚ç‚¹Zåæ ‡</param>
+/// <param name="xt">ç›®æ ‡èŠ‚ç‚¹Xåæ ‡</param>
+/// <param name="yt">ç›®æ ‡èŠ‚ç‚¹Yåæ ‡</param>
+/// <param name="zt">ç›®æ ‡èŠ‚ç‚¹Zåæ ‡</param>
 void AddLinkU(double xs, double ys, double zs, double xt, double yt, double zt);
 
-//¾­Î³¶È×ª»»(»¡¶È)
+//ç»çº¬åº¦è½¬æ¢(å¼§åº¦)
 BLH XYZtoLB(double X, double Y, double Z);
 BLH XYZToLatLon(double X, double Y, double Z);
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---ÉèÖÃÉãÓ°»ú×¢ÊÓ
+/// å¯è§†åŒ–éƒ¨åˆ†---è®¾ç½®æ‘„å½±æœºæ³¨è§†
 /// </summary>
 void lookat(int type);
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---´ÓÎÄ¼ş¼ÓÔØ²ÄÖÊ
+/// å¯è§†åŒ–éƒ¨åˆ†---ä»æ–‡ä»¶åŠ è½½æè´¨
 /// </summary>
 int LoadTexture(const char* filename, int width, int height, int depth, GLenum color_type, GLenum filter_type);
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---¼ÓÔØ²ÄÖÊµ½Ê¹ÓÃ³¡¾°
+/// å¯è§†åŒ–éƒ¨åˆ†---åŠ è½½æè´¨åˆ°ä½¿ç”¨åœºæ™¯
 /// </summary>
 void LoadTextures(GLuint* texture_id, int MaxNrofTextures);
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---»æÖÆÎÀĞÇ½Úµã
+/// å¯è§†åŒ–éƒ¨åˆ†---ç»˜åˆ¶å«æ˜ŸèŠ‚ç‚¹
 /// </summary>
 void drawSatellite(Vec3 _p, bool enabled = true);
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---Î»ÖÃÂ½µØ½Úµã
+/// å¯è§†åŒ–éƒ¨åˆ†---ä½ç½®é™†åœ°èŠ‚ç‚¹
 /// </summary>
 void drawGround(Vec3 _p);
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---»æÖÆ¹¥»÷·¶Î§
+/// å¯è§†åŒ–éƒ¨åˆ†---ç»˜åˆ¶æ”»å‡»èŒƒå›´
 /// </summary>
 void drawAttackSphere();
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---»æÖÆ3DµØÇò
+/// å¯è§†åŒ–éƒ¨åˆ†---ç»˜åˆ¶3Dåœ°çƒ
 /// </summary>
 void drawEarth3D(float r);
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---»æÖÆÁ´½Ó
+/// å¯è§†åŒ–éƒ¨åˆ†---ç»˜åˆ¶é“¾æ¥
 /// </summary>
 void drawLine3D(float lineWidth = 2.0f);
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---»æÖÆÊ¹ÓÃµÄÁ´½ÓÏß
+/// å¯è§†åŒ–éƒ¨åˆ†---ç»˜åˆ¶ä½¿ç”¨çš„é“¾æ¥çº¿
 /// </summary>
 void drawLineUSing(float lineWidth = 5.0f);
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---¸üĞÂ»­ÃæµÄº¯Êı»Øµ÷
+/// å¯è§†åŒ–éƒ¨åˆ†---æ›´æ–°ç”»é¢çš„å‡½æ•°å›è°ƒ
 /// </summary>
 void display();
 
 /// <summary>
-/// Êı¾İ²¿·Ö---¸üĞÂÎÀĞÇÊı¾İ
+/// æ•°æ®éƒ¨åˆ†---æ›´æ–°å«æ˜Ÿæ•°æ®
 /// </summary>
 void updateConstellation();
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---³õÊ¼»¯¿ÉÊÓ»¯´°¿Ú
+/// å¯è§†åŒ–éƒ¨åˆ†---åˆå§‹åŒ–å¯è§†åŒ–çª—å£
 /// </summary>
 void InitWindow(int argc, char* argv[], int width, int height, const char* title);
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---ĞŞ¸Ä´°¿ÚĞÎ×´µÄº¯Êı»Øµ÷
+/// å¯è§†åŒ–éƒ¨åˆ†---ä¿®æ”¹çª—å£å½¢çŠ¶çš„å‡½æ•°å›è°ƒ
 /// </summary>
 void reshape(int w, int h);
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---Êó±êµã»÷ÊÂ¼şº¯Êı»Øµ÷
+/// å¯è§†åŒ–éƒ¨åˆ†---é¼ æ ‡ç‚¹å‡»äº‹ä»¶å‡½æ•°å›è°ƒ
 /// </summary>
 void MouseEvent(int button, int state, int x, int y);
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---Êó±êÒÆ¶¯ÊÂ¼şº¯Êı»Øµ÷
+/// å¯è§†åŒ–éƒ¨åˆ†---é¼ æ ‡ç§»åŠ¨äº‹ä»¶å‡½æ•°å›è°ƒ
 /// </summary>
 void Motion(int button, int state, int x, int y);
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---Ò»°ã×´Ì¬ÊÂ¼şº¯Êı»Øµ÷
+/// å¯è§†åŒ–éƒ¨åˆ†---ä¸€èˆ¬çŠ¶æ€äº‹ä»¶å‡½æ•°å›è°ƒ
 /// </summary>
 void IdleEvent();
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---²âÊÔ¿ÉÊÓ»¯º¯Êı
+/// å¯è§†åŒ–éƒ¨åˆ†---æµ‹è¯•å¯è§†åŒ–å‡½æ•°
 /// </summary>
 int test(int argc, char* argv[]);
 
 /// <summary>
-/// ¿ÉÊÓ»¯²¿·Ö---¿ªÊ¼»æÖÆ¿ÉÊÓ»¯´°¿Ú
+/// å¯è§†åŒ–éƒ¨åˆ†---å¼€å§‹ç»˜åˆ¶å¯è§†åŒ–çª—å£
 /// </summary>
 void beginWindow();
 #else

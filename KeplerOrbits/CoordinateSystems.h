@@ -1,16 +1,16 @@
-#pragma once
-//×ø±êÏµÍ·ÎÄ¼ş
+ï»¿#pragma once
+//åæ ‡ç³»å¤´æ–‡ä»¶
 #include <iostream>
 
 namespace KeplerOrbits
 {
-	//ÓÃÓÚ¼ÆËã¸ø¶¨ÈåÂÔÈÕ(jd)µÄ¸ñÁÖÄáÖÎÆ½¾ùºãĞÇÊ±(GMST)£¬ÕâÊÇÌìÎÄÑ§ÖĞÓÃÓÚÊ±¼ä²âÁ¿µÄÒ»¸ö²ÎÊı
+	//ç”¨äºè®¡ç®—ç»™å®šå„’ç•¥æ—¥(jd)çš„æ ¼æ—å°¼æ²»å¹³å‡æ’æ˜Ÿæ—¶(GMST)ï¼Œè¿™æ˜¯å¤©æ–‡å­¦ä¸­ç”¨äºæ—¶é—´æµ‹é‡çš„ä¸€ä¸ªå‚æ•°
 	double GetGMST(double jd);
 
-	//´æ´¢ÃèÊöÌìÌå¹ìµÀµÄÔªËØ£¬Èç°ë³¤Öá¡¢Æ«ĞÄÂÊ¡¢Çã½ÇµÈ
+	//å­˜å‚¨æè¿°å¤©ä½“è½¨é“çš„å…ƒç´ ï¼Œå¦‚åŠé•¿è½´ã€åå¿ƒç‡ã€å€¾è§’ç­‰
 	class OrbitalElements;
 
-	//ÈıÎ¬¿Õ¼äÖĞµÄµÑ¿¨¶û×ø±êÏµ
+	//ä¸‰ç»´ç©ºé—´ä¸­çš„ç¬›å¡å°”åæ ‡ç³»
 	class CartesianCoordinates
 	{
 	public:
@@ -30,7 +30,7 @@ namespace KeplerOrbits
 		double m_x, m_y, m_z;
 	};
 	
-	//µØÀí×ø±êÏµ
+	//åœ°ç†åæ ‡ç³»
 	class GeoCoordinates
 	{
 	public:
@@ -53,7 +53,7 @@ namespace KeplerOrbits
 		double m_latitude, m_longitude, m_height;
 	};
 
-	//µØÆ½×ø±êÏµ£¬´æ´¢µãµÄ·½Î»½Ç(azimuth)ºÍ¸ß¶È½Ç(altitude)¡£·½Î»½ÇÊÇÏà¶ÔÓÚ±±·½µÄ½Ç¶È£¬¸ß¶È½ÇÊÇÏà¶ÔÓÚµØÆ½ÏßµÄ½Ç¶È¡£
+	//åœ°å¹³åæ ‡ç³»ï¼Œå­˜å‚¨ç‚¹çš„æ–¹ä½è§’(azimuth)å’Œé«˜åº¦è§’(altitude)ã€‚æ–¹ä½è§’æ˜¯ç›¸å¯¹äºåŒ—æ–¹çš„è§’åº¦ï¼Œé«˜åº¦è§’æ˜¯ç›¸å¯¹äºåœ°å¹³çº¿çš„è§’åº¦ã€‚
 	class HorizontalCoordinates
 	{
 		friend std::ostream& operator << (std::ostream& os, const HorizontalCoordinates& horizontal);
@@ -68,7 +68,7 @@ namespace KeplerOrbits
 		double m_azimuth, m_altitude;
 	};
 
-	//Å·À­½Ç×ø±êÏµ£¬ÕâÍ¨³£ÓÃÓÚÃèÊöÈıÎ¬¿Õ¼äÖĞµÄĞı×ª¡£Ëü°üº¬Èı¸ö½Ç¶È£ºphi¡¢thetaºÍpsi£¬ÒÔ¼°Ò»¸ö±íÊ¾¾àÀëµÄr
+	//æ¬§æ‹‰è§’åæ ‡ç³»ï¼Œè¿™é€šå¸¸ç”¨äºæè¿°ä¸‰ç»´ç©ºé—´ä¸­çš„æ—‹è½¬ã€‚å®ƒåŒ…å«ä¸‰ä¸ªè§’åº¦ï¼šphiã€thetaå’Œpsiï¼Œä»¥åŠä¸€ä¸ªè¡¨ç¤ºè·ç¦»çš„r
 	class EulerCoordinates
 	{
 	public:
@@ -84,7 +84,7 @@ namespace KeplerOrbits
 		double phi, theta, psi, r;
 	};
 
-	//³àµÀ×ø±êÏµ£¬ÕâÊÇÒ»ÖÖÌìÎÄÑ§ÖĞ³£ÓÃµÄ×ø±êÏµÍ³£¬´æ´¢µãµÄ³à¾­(alpha)ºÍ³àÎ³(delta)
+	//èµ¤é“åæ ‡ç³»ï¼Œè¿™æ˜¯ä¸€ç§å¤©æ–‡å­¦ä¸­å¸¸ç”¨çš„åæ ‡ç³»ç»Ÿï¼Œå­˜å‚¨ç‚¹çš„èµ¤ç»(alpha)å’Œèµ¤çº¬(delta)
 	class EquatorialCoordinates
 	{
 		friend std::ostream& operator << (std::ostream& os, const EquatorialCoordinates& cartesian);
@@ -99,7 +99,7 @@ namespace KeplerOrbits
 		double m_alpha, m_delta;
 	};
 
-	//»ÆµÀ×ø±êÏµ£¬ÕâÊÇÁíÒ»ÖÖÌìÎÄÑ§ÖĞÊ¹ÓÃµÄ×ø±êÏµÍ³£¬´æ´¢µãµÄ»Æ¾­(lambda)ºÍ»ÆÎ³(betta)
+	//é»„é“åæ ‡ç³»ï¼Œè¿™æ˜¯å¦ä¸€ç§å¤©æ–‡å­¦ä¸­ä½¿ç”¨çš„åæ ‡ç³»ç»Ÿï¼Œå­˜å‚¨ç‚¹çš„é»„ç»(lambda)å’Œé»„çº¬(betta)
 	class EcliptikCoordinates
 	{
 		friend std::ostream& operator << (std::ostream& os, const EcliptikCoordinates& cartesian);
