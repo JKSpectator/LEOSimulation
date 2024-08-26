@@ -9,22 +9,17 @@
 >1. city_data.txt——地面站点的经纬度信息
 >2. communication_config.txt——通信模拟参数
 >3. config.txt——LEO卫星信息
-3. 选择x64/x86方式运行（x64直接进行数据模拟，x86使用Glut可视化辅助模拟）
->注意，选择x86可视化时，需要确保如下几个步骤：
->1. glut32.dll放置于LEOSimulation.cpp即main函数文件同级目录
->2. 配置项目属性：C/C++——附加包含目录为OpenGL的文件夹
->3. 配置项目属性：链接器——附加库目录为OpenGL文件夹
+3. 运行
 ### 文件目录解析
 1. ConfigTxt文件夹——存储配置文件
 2. KeplerOrbits文件夹——轨道计算辅助代码文件
-3. OpenGL文件夹——Glut可视化库
-4. Allinclude.h——所有使用到的库
-5. Constellayion.cpp——星座模拟器实现代码
-6. Constellayion.h——星座模拟器头文件
-7. DelaySimulation.cpp——通信模拟器实现代码
-8. DelaySimulation.h——通信模拟器头文件
-9. LEOSimulation.cpp——卫星通信**示例**代码
-10. LEOSimulation.h——示例代码头文件
+3. Allinclude.h——所有使用到的库
+4. Constellayion.cpp——星座模拟器实现代码
+5. Constellayion.h——星座模拟器头文件
+6. DelaySimulation.cpp——通信模拟器实现代码
+7. DelaySimulation.h——通信模拟器头文件
+8. LEOSimulation.cpp——卫星通信**示例**代码
+9. LEOSimulation.h——示例代码头文件
 ### 配置详情 <a id="config">
 1. city_data.txt：名字 纬度 经度
 2. communication_config.txt：
