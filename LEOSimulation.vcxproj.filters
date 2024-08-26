@@ -41,9 +41,6 @@
     <ClInclude Include="Allinclude.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="OpenGL\glut.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Constellation.h">
       <Filter>头文件</Filter>
     </ClInclude>
