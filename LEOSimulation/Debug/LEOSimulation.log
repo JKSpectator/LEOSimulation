@@ -1,17 +1,1 @@
-﻿  LEOSimulation.cpp
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(377,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(393,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(424,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(426,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(428,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(445,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(456,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(460,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(464,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(468,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(591,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(598,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(605,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(609,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Code\VS\LEOSimulation\LEOSimulation.cpp(613,20): warning C4018: “<”: 有符号/无符号不匹配
-  LEOSimulation.vcxproj -> D:\Code\VS\LEOSimulation\Debug\LEOSimulation.exe
+﻿  LEOSimulation.vcxproj -> D:\Code\VS\LEOSimulation\Debug\LEOSimulation.exe

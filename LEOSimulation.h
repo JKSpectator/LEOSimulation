@@ -31,6 +31,11 @@ struct Vec3
 	double x, y, z;
 };
 
+/// <summary>
+/// 初始化星座和通信模拟器
+/// </summary>
+void SInit();
+
 #if defined(_WIN64)
 //Glut库要求32位
 #elif defined(_WIN32)

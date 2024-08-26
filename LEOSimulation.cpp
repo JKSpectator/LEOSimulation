@@ -2,28 +2,12 @@
 #include "DelaySimulation.h"
 #include "LEOSimulation.h"
 #include "Constellation.h"
-#include "ShareMemory.h"
 
 Constellation cs;
 Communication comm;
-#if defined(_WIN64)
 
-int main(int argc, char* argv[])
+void SInit()
 {
-	SYSTEMTIME sys_time;
-	LPVOID pBuffer;
-	string strMapName("global_share_memory");
-	HANDLE hMap = NULL;
-
-	hMap = OpenFileMapping(FILE_MAP_ALL_ACCESS, 0, L"global_share_memory");
-	if (hMap == NULL) {
-		cout << "no memorymap,i will creat a new one" << endl;
-		hMap = CreateFileMapping(NULL, NULL, PAGE_READWRITE, 0, 0X1000, L"global_share_memory");
-	}
-
-	pBuffer = MapViewOfFile(hMap, FILE_MAP_ALL_ACCESS, 0, 0, 0);
-	vector<double> start;
-
 	cs = Constellation();
 	comm = Communication();
 	cs.attack[0].SetLatAndLon(comm.attack.latitude(), comm.attack.longitude());
@@ -31,25 +15,23 @@ int main(int argc, char* argv[])
 	cs.attack[0].y = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[1];
 	cs.attack[0].z = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[2];
 	cs.AddGroundSandT(comm.source, comm.target);
+}
+#if defined(_WIN64)
+
+int main(int argc, char* argv[])
+{
+	SInit();
 
 	while (true)
 	{
 		cs.updateSatellites();
 		if (cs.pathId.size() != 0)
 		{
-			start.clear();
-			cout << "测试延迟并发送" << endl;
-			//cout << "通信延迟：" << comm.communication_stt(cs.pathDistance, cs.pathState) << endl;
-			start.push_back(comm.communication_stt(cs.pathDistance, cs.pathState));
-			//cout << "无噪声通信延迟：" << comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState) << endl;
-			start.push_back(comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState));
-			//cout << "最理想通信延迟：" << comm.communication_stt_ideal(cs.pathDistance) << endl;
-			start.push_back(comm.communication_stt_ideal(cs.pathDistance));
-			memcpy((double*)pBuffer, &start[0], sizeof(start));
+			cout << "通信延迟：" << comm.communication_stt(cs.pathDistance, cs.pathState) << endl;
+			cout << "无噪声通信延迟：" << comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState) << endl;
+			cout << "最理想通信延迟：" << comm.communication_stt_ideal(cs.pathDistance) << endl;
 		}
 	}
-	UnmapViewOfFile(pBuffer);
-	CloseHandle(hMap);
 	return 0;
 }
 #elif defined(_WIN32)
@@ -657,7 +639,46 @@ int main(int argc, char* argv[])
 #else
 int main(int argc, char* argv[])
 {
-	cout << Hello World << endl;
+	SYSTEMTIME sys_time;
+	LPVOID pBuffer;
+	string strMapName("global_share_memory");
+	HANDLE hMap = NULL;
+
+	hMap = OpenFileMapping(FILE_MAP_ALL_ACCESS, 0, L"global_share_memory");
+	if (hMap == NULL) {
+		cout << "no memorymap,i will creat a new one" << endl;
+		hMap = CreateFileMapping(NULL, NULL, PAGE_READWRITE, 0, 0X1000, L"global_share_memory");
+	}
+
+	pBuffer = MapViewOfFile(hMap, FILE_MAP_ALL_ACCESS, 0, 0, 0);
+	vector<double> start;
+
+	cs = Constellation();
+	comm = Communication();
+	cs.attack[0].SetLatAndLon(comm.attack.latitude(), comm.attack.longitude());
+	cs.attack[0].x = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[0];
+	cs.attack[0].y = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[1];
+	cs.attack[0].z = cs.LatLonToXYZ(cs.attack[0].Lat(), cs.attack[0].Lon())[2];
+	cs.AddGroundSandT(comm.source, comm.target);
+
+	while (true)
+	{
+		cs.updateSatellites();
+		if (cs.pathId.size() != 0)
+		{
+			start.clear();
+			cout << "测试延迟并发送" << endl;
+			//cout << "通信延迟：" << comm.communication_stt(cs.pathDistance, cs.pathState) << endl;
+			start.push_back(comm.communication_stt(cs.pathDistance, cs.pathState));
+			//cout << "无噪声通信延迟：" << comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState) << endl;
+			start.push_back(comm.communication_stt_no_noisy(cs.pathDistance, cs.pathState));
+			//cout << "最理想通信延迟：" << comm.communication_stt_ideal(cs.pathDistance) << endl;
+			start.push_back(comm.communication_stt_ideal(cs.pathDistance));
+			memcpy((double*)pBuffer, &start[0], sizeof(start));
+		}
+	}
+	UnmapViewOfFile(pBuffer);
+	CloseHandle(hMap);
 	return 0;
 }
 #endif
