@@ -49,6 +49,11 @@ int OrbitBody::GetID() const
 	return m_id;
 }
 
+double OrbitBody::GetSma() const
+{
+	return 		m_orbitalElements.GetSemimajorAxis();
+}
+
 Trajectory OrbitBody::GetTrajectory(int stepCount, int time_offset) const
 {
 	Trajectory trajectory;

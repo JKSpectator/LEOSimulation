@@ -5,7 +5,7 @@
 3. 模拟地面攻击站点导致的延时效果
 ### 使用方法
 1. 下载代码使用VS打开
-2. 配置ConfigTxt文件夹下的配置文件（详细配置请于[配置详情](#config)查看）
+2. 配置ConfigTxt文件夹下的配置文件，或直接使用默认配置（详细配置请于[配置详情](#config)查看）
 >1. city_data.txt——地面站点的经纬度信息
 >2. communication_config.txt——通信模拟参数
 >3. config.txt——LEO卫星信息
