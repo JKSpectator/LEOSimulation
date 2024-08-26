@@ -65,6 +65,7 @@ public:
 	int num_nodes_per_plane;//每个平面的卫星数量
 	double sma;//长半轴距离
 	int m_time = 0;
+	int mode = 1;
 	vector<GroundStation> grounds;//地面站数组
 	vector<SatelliteStation> satellites;//卫星数组
 	vector<KeplerOrbits::OrbitBody> planes;
@@ -81,7 +82,7 @@ public:
 	Constellation(const string& datafile = "ConfigTxt\\city_data.txt", const string& configfile = "ConfigTxt\\config.txt");
 	vector<double> LatLonToXYZ(double lat, double lon);
 	void updateSatellites();
-	double calculateMaxSpaceToGndDistance(double max_deg = 90);
+	double calculateMaxSpaceToGndDistance(double max_deg = 90, double m_sma = -1);
 	double calculateMaxISLDistance(int min_communication_altitude = 1000);
 	double calculateDistanceBetweenSatellites(SatelliteStation s1, SatelliteStation s2);
 	void shortestPathByFloyd();
