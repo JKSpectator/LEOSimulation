@@ -56,6 +56,11 @@ if (cs.pathId.size() != 0)
 10. LEOSimulation.h——示例代码头文件
 ### 配置详情 <a id="config">
 1. city_data.txt：名字 纬度 经度
+| 元素 | 描述 |
+| --- | --- |
+| name | 地面站的名字 |
+| lat | 纬度 |
+| lon | 经度 |
 2. communication_config.txt：
 * bandwidth 带宽大小 (bps)
 * velocity 电磁波速度 (m/s)
