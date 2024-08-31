@@ -1,6 +1,6 @@
 ﻿#include "Constellation.h"
 
-long long map[MAX_SATALLITE_NUM][MAX_SATALLITE_NUM];  //邻接矩阵存储 
+long long m_map[MAX_SATALLITE_NUM][MAX_SATALLITE_NUM];  //邻接矩阵存储 
 int path[MAX_SATALLITE_NUM][MAX_SATALLITE_NUM]; //路径矩阵
 int n;
 
@@ -11,7 +11,7 @@ std::mt19937 gen(rd());
 std::uniform_int_distribution<> dis(0, 10);
 #define DISABLED_NUM 3
 
-GroundStation::GroundStation(int ID, string Name, double Lat, double Lon, double X, double Y, double Z)
+GroundStation::GroundStation(int ID, string Name, double Lat, double Lon, double X, double Y, double Z, double R)
 {
 	id = ID;
 	name = Name;
@@ -20,6 +20,7 @@ GroundStation::GroundStation(int ID, string Name, double Lat, double Lon, double
 	x = X;
 	y = Y;
 	z = Z;
+	comR = R;
 }
 
 void GroundStation::SetLatAndLon(double Lat, double Lon)
@@ -55,27 +56,31 @@ Constellation::Constellation(const string& datafile, const string& configfile)
 	attack.push_back(GroundStation(0, "null", 0, 0, 0, 0, 0));
 	//地面站信息获取
 	ifstream data(datafile);
+	// 读取文件内容到字符串
+	std::string content((std::istreambuf_iterator<char>(data)), std::istreambuf_iterator<char>());
 	int g_id = -1;
-	if (data.is_open())
-	{
-		string line;
-		getline(data, line);
-		while (getline(data, line))
-		{
-			istringstream iss(line);
-			string key;
-			if (getline(iss, key, ' '))
-			{
-				string lat,lon;
-				getline(iss, lat, ' ');
-				getline(iss, lon, ' ');
-				vector<double> a = LatLonToXYZ(stod(lat), stod(lon));
-				grounds.push_back(GroundStation(g_id, key, stod(lat), stod(lon), a[0], a[1], a[2]));
-				g_id--;
-			}
-		}
+	if (!data.is_open()) {
+		cerr << "无法打开文件city_data.json" << endl;
+		return ;
 	}
 	data.close();
+	// 解析JSON字符串
+	try {
+		json j = json::parse(content);
+
+		// 遍历JSON数组
+		for (const auto& city : j) {
+			string name = city["name"];
+			double lat = city["lat"];
+			double lon = city["lon"];
+			vector<double> a = LatLonToXYZ((lat), (lon));
+			grounds.push_back(GroundStation(g_id, name, (lat), (lon), a[0], a[1], a[2]));
+			g_id--;
+		}
+	}
+	catch (json::parse_error& e) {
+		std::cerr << "JSON解析错误: " << e.what() << std::endl;
+	}
 	//卫星信息
 	mode = 1;//Mode=1自动生成轨道，Mode=2手动设置轨道参数
 	vector<double> Ecc;
@@ -84,77 +89,47 @@ Constellation::Constellation(const string& datafile, const string& configfile)
 	vector<double> Lta;
 	vector<double> Ltp;
 	ifstream config(configfile);
+	if (!config.is_open()) {
+		cerr << "无法打开文件config.json" << endl;
+		return;
+	}
+	// 读取文件内容到字符串
+	std::string content1((std::istreambuf_iterator<char>(config)), std::istreambuf_iterator<char>());
 	int s_id = 0;
-	if (config.is_open())
-	{
-		string line;
-		getline(config, line);
-		while (getline(config, line))
+	config.close();
+
+	try {
+		json j = json::parse(content1);
+
+		// 访问数据
+		if (j["mode"].get<std::string>() == "Auto")
+			mode = 1;
+		else
+			mode = 2;
+		if (mode == 1)
 		{
-			istringstream iss(line);
-			string key;
-			if (getline(iss, key, ' '))
-			{
-				string value;
-				getline(iss, value, ' ');
-				if (key == "Mode")
-				{
-					if (value == "Auto")
-						mode = 1;
-					else
-						mode = 2;
-				}
-				if (mode == 1)
-				{
-					if (key == "planesNum")
-					{
-						num_planes = stoi(value);
-					}
-					else if (key == "nodesNum")
-					{
-						num_nodes_per_plane = stoi(value);
-					}
-					else if (key == "sma")
-					{
-						sma = stod(value) * 10 + earth_radius;
-					}
-				}
-				else
-				{
-					if (key == "ManualPlanesNum")
-					{
-						num_planes = stoi(value);
-					}
-					else if (key == "ManualNodesNum")
-					{
-						num_nodes_per_plane = stoi(value);
-					}
-					else if (key == "Ecc")
-					{
-						Ecc.push_back(stod(value));
-					}
-					else if (key == "Sma")
-					{
-						Sma.push_back(stod(value));
-					}
-					else if (key == "Inc")
-					{
-						Inc.push_back(stod(value));
-					}
-					else if (key == "Lta")
-					{
-						Lta.push_back(stod(value));
-					}
-					else if (key == "Ltp")
-					{
-						Ltp.push_back(stod(value));
-					}
-				}
+			num_planes = j["planesNum"].get<int>();
+			num_nodes_per_plane = j["nodesNum"].get<int>();
+			sma = j["sma"].get<double>() * 10 + earth_radius;
+		}
+		else
+		{
+			num_planes = j["manualPlanesNum"].get<int>();
+			num_nodes_per_plane = j["manualNodesNum"].get<int>();
+			// 遍历轨道数组
+			for (const auto& orbit : j["orbits"]) {
+				Ecc.push_back(orbit["ecc"].get<double>());
+				Sma.push_back(orbit["sma"].get<double>());
+				Inc.push_back(orbit["inc"].get<double>());
+				Lta.push_back(orbit["lta"].get<double>());
+				Ltp.push_back(orbit["ltp"].get<double>());
 			}
 		}
 	}
-	config.close();
-	//根据卫星信息计算卫星的位置信息
+	catch (json::parse_error& e) {
+		std::cerr << "config.json解析错误: " << e.what() << std::endl;
+	}
+	//根据轨道信息计算卫星的位置信息
 	for (int i = 0; i < num_planes; i++)
 	{
 		KeplerOrbits::OrbitalElements orbitalElements;
@@ -265,6 +240,7 @@ vector<double> Constellation::LatLonToXYZ(double lat, double lon) {
 	return ans;
 }
 
+#ifdef ATTACK_K
 void Constellation::updateSatellites()
 {
 	m_time++;
@@ -369,13 +345,18 @@ void Constellation::updateSatellites()
 	for (int j = 0; j < satellites.size() && attack.size()>0; j++)
 	{
 		double d = sqrt(pow(satellites[j].x - attack[0].x, 2) + pow(satellites[j].y - attack[0].y, 2) + pow(satellites[j].z - attack[0].z, 2));
-		if (mode == 1)
-		{
-			max_distance = calculateMaxSpaceToGndDistance();
-		}
+		if((int)attack[0].comR > 0)
+			max_distance = (int)attack[0].comR;
 		else
 		{
-			max_distance = calculateMaxSpaceToGndDistance(90, planes[j / num_nodes_per_plane].GetSma());
+			if (mode == 1)
+			{
+				max_distance = calculateMaxSpaceToGndDistance();
+			}
+			else
+			{
+				max_distance = calculateMaxSpaceToGndDistance(90, planes[j / num_nodes_per_plane].GetSma());
+			}
 		}
 		if ((int)d < (int)max_distance)
 		{
@@ -385,6 +366,112 @@ void Constellation::updateSatellites()
 	if (start.size() != 0 && end.size() != 0)
 		shortestPathByFloyd();
 }
+#else
+void Constellation::updateSatellites()
+{
+	m_time++;
+	links.clear();
+	start.clear();
+	end.clear();
+	sdistance.clear();
+	edistance.clear();
+	pathId.clear();
+	pathDistance.clear();
+	pathState.clear();
+	int s_id = 0;
+	for (int i = 0; i < num_planes; i++)
+	{
+		KeplerOrbits::Trajectory trajectory = planes[i].GetTrajectory(num_nodes_per_plane, m_time);
+		for (int j = 0; j < num_nodes_per_plane; j++)
+		{
+			//double tf = (planes[i].GetSiderealOrbitPeriod() / num_nodes_per_plane) * j;
+			satellites[s_id].x = trajectory[j].x();
+			satellites[s_id].y = trajectory[j].y();
+			satellites[s_id].z = trajectory[j].z();
+			s_id++;
+			if (j != 0)
+			{
+				if (j == num_nodes_per_plane - 1)
+				{
+					Link l = Link();
+					l.source = satellites[s_id - 2];
+					l.target = satellites[s_id - 1];
+					l.distance = calculateDistanceBetweenSatellites(satellites[s_id - 2], satellites[s_id - 1]);
+					links.push_back(l);
+					Link ll = Link();
+					ll.source = satellites[s_id - 1];
+					ll.target = satellites[s_id - num_nodes_per_plane];
+					l.distance = calculateDistanceBetweenSatellites(satellites[s_id - 1], satellites[s_id - num_nodes_per_plane]);
+					links.push_back(ll);
+				}
+				else
+				{
+					Link l = Link();
+					l.source = satellites[s_id - 2];
+					l.target = satellites[s_id - 1];
+					l.distance = calculateDistanceBetweenSatellites(satellites[s_id - 2], satellites[s_id - 1]);
+					links.push_back(l);
+				}
+			}
+		}
+	}
+	//计算平面轨道间卫星的通信
+	int max_isl_range = calculateMaxISLDistance();
+	for (int i = 0; i < num_planes; i++)
+	{
+		int j;
+		if (i == num_planes - 1)
+			j = 0;
+		else
+			j = i + 1;
+		for (int k = 0; k < num_nodes_per_plane; k++)
+		{
+			int d = calculateDistanceBetweenSatellites(satellites[k + i * num_nodes_per_plane], satellites[k + j * num_nodes_per_plane]);
+			if (d < max_isl_range)
+			{
+				Link l = Link();
+				l.source = satellites[k + i * num_nodes_per_plane];
+				l.target = satellites[k + j * num_nodes_per_plane];
+				l.distance = d;
+				links.push_back(l);
+			}
+		}
+	}
+	//计算地面站与卫星可能的连接
+	double max_distance = 0;
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < satellites.size(); j++)
+		{
+			satellites[j].enabled = 0;
+			double d = sqrt(pow(satellites[j].x - grounds[i].x, 2) + pow(satellites[j].y - grounds[i].y, 2) + pow(satellites[j].z - grounds[i].z, 2));
+			if (mode == 1)
+			{
+				max_distance = calculateMaxSpaceToGndDistance();
+			}
+			else
+			{
+				max_distance = calculateMaxSpaceToGndDistance(90, planes[j / num_nodes_per_plane].GetSma());
+			}
+			if ((int)d < (int)max_distance)
+			{
+				if (i == 0)
+				{
+					start.push_back(satellites[j]);
+					sdistance.push_back(d);
+				}
+				else
+				{
+					end.push_back(satellites[j]);
+					edistance.push_back(d);
+				}
+			}
+		}
+	}
+	if (start.size() != 0 && end.size() != 0)
+		shortestPathByFloyd();
+}
+#endif // ATTACK_K
 
 double Constellation::calculateMaxSpaceToGndDistance(double max_deg, double m_sma)
 {
@@ -417,7 +504,7 @@ void Constellation::shortestPathByFloyd()
 	{
 		for (int j = 0; j < n; j++)
 		{
-			map[i][j] = INT_MAX;
+			m_map[i][j] = INT_MAX;
 			path[i][j] = j;
 		}
 	}
@@ -425,24 +512,24 @@ void Constellation::shortestPathByFloyd()
 	{
 		if (links[i].source.enabled != 2 && links[i].target.enabled != 2)
 		{
-			map[links[i].source.id + 1][links[i].target.id + 1] = (int)links[i].distance;
-			map[links[i].target.id + 1][links[i].source.id + 1] = (int)links[i].distance;
+			m_map[links[i].source.id + 1][links[i].target.id + 1] = (int)links[i].distance;
+			m_map[links[i].target.id + 1][links[i].source.id + 1] = (int)links[i].distance;
 		}
 	}
 	for (int i = 0; i < start.size(); i++)
 	{
 		if (start[i].enabled != 2)
 		{
-			map[0][start[i].id + 1] = (int)sdistance[i];
-			map[start[i].id + 1][0] = (int)sdistance[i];
+			m_map[0][start[i].id + 1] = (int)sdistance[i];
+			m_map[start[i].id + 1][0] = (int)sdistance[i];
 		}
 	}
 	for (int i = 0; i < end.size(); i++)
 	{
 		if (end[i].enabled != 2)
 		{
-			map[n - 1][end[i].id + 1] = (int)edistance[i];
-			map[end[i].id + 1][n - 1] = (int)edistance[i];
+			m_map[n - 1][end[i].id + 1] = (int)edistance[i];
+			m_map[end[i].id + 1][n - 1] = (int)edistance[i];
 		}
 	}
 	int ans = floyd(0, n - 1);
@@ -461,15 +548,15 @@ void Constellation::shortestPathByFloyd()
 		{
 			if (i == 0)
 			{
-				pathDistance.push_back(map[0][pathId[0] + 1]);
+				pathDistance.push_back(m_map[0][pathId[0] + 1]);
 			}
 			else
 			{
-				pathDistance.push_back(map[pathId[i-1]+1][pathId[i]]);
+				pathDistance.push_back(m_map[pathId[i-1]+1][pathId[i]]);
 			}
 			if (i == pathId.size() - 1)
 			{
-				pathDistance.push_back(map[pathId[i]+1][n - 1]);
+				pathDistance.push_back(m_map[pathId[i]+1][n - 1]);
 			}
 		}
 	}
@@ -481,6 +568,15 @@ void Constellation::AddGroundSandT(KeplerOrbits::GeoCoordinates source, KeplerOr
 	grounds.insert(grounds.begin(), gsT);
 	GroundStation gsS = GroundStation(-1 * grounds.size() - 1, "Source", source.latitude(), source.longitude(), LatLonToXYZ(source.latitude(), source.longitude())[0], LatLonToXYZ(source.latitude(), source.longitude())[1], LatLonToXYZ(source.latitude(), source.longitude())[2]);
 	grounds.insert(grounds.begin(), gsS);
+}
+
+void Constellation::AddAttackStation(KeplerOrbits::GeoCoordinates attackStation, double comR)
+{
+	attack[0].SetLatAndLon(attackStation.latitude(), attackStation.longitude());
+	attack[0].comR = comR;
+	attack[0].x = LatLonToXYZ(attack[0].Lat(), attack[0].Lon())[0];
+	attack[0].y = LatLonToXYZ(attack[0].Lat(), attack[0].Lon())[1];
+	attack[0].z = LatLonToXYZ(attack[0].Lat(), attack[0].Lon())[2];
 }
 
 // 求最短路径
@@ -499,10 +595,10 @@ int floyd(int from, int to) { //从起点到目标点
 
 
 				// 更新距离和路径
-				if (map[i][j] > (map[i][k] + map[k][j]) && i != j) {
+				if (m_map[i][j] > (m_map[i][k] + m_map[k][j]) && i != j) {
 
 					// 距离
-					map[i][j] = map[i][k] + map[k][j];
+					m_map[i][j] = m_map[i][k] + m_map[k][j];
 
 					// 路径
 					path[i][j] = path[i][k];
@@ -511,5 +607,5 @@ int floyd(int from, int to) { //从起点到目标点
 		}
 	}
 
-	return map[from][to];
+	return m_map[from][to];
 }

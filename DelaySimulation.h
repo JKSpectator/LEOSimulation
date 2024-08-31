@@ -6,15 +6,24 @@
 class Communication
 {
 private:
-	double delay_normal;//存储正常模拟下通信延时
-	double delay_no_noisy;//存储无噪声模拟下的通信延时
-	double delay_ideal;//存储理想模拟下的通信延时
-	int bandwidth;//带宽
-	double velocity;//电磁波传播速度
-	int packet_size;//包大小
-	int noisy;//噪声配置，1：高斯噪声；2：均匀噪声
-	double distribution_left;//噪声区间左端点
-	double distribution_right;//噪声区间右端点
+	//存储正常模拟下通信延时
+	double delay_normal;
+	//存储无噪声模拟下的通信延时
+	double delay_no_noisy;
+	//存储理想模拟下的通信延时
+	double delay_ideal;
+	//带宽
+	int bandwidth;
+	//电磁波传播速度
+	double velocity;
+	//包大小
+	int packet_size;
+	//噪声配置，1：高斯噪声；2：均匀噪声
+	int noisy;
+	//噪声区间左端点
+	double distribution_left;
+	//噪声区间右端点
+	double distribution_right;
 
 	//伪随机数生成器，基于 19937 个元素的周期，适用于生成高质量的随机数
 	mt19937 generator;
@@ -42,9 +51,9 @@ private:
 public:
 	KeplerOrbits::GeoCoordinates source;//信息发送节点
 	KeplerOrbits::GeoCoordinates target;//信息接收节点
-	KeplerOrbits::GeoCoordinates attack;//攻击节点
 
-	Communication(const string& configfile = "ConfigTxt\\communication_config.txt");
+
+	Communication(const string& configfile = "ConfigTxt\\communication_config.json");
 
 	/// <summary>
 	/// 获取模拟的通信时延

@@ -1,6 +1,5 @@
 ﻿#include "DelaySimulation.h"
 
-
 double Communication::generate_gauss_in_range(double a, double b) 
 {
 	double mean = (a + b) / 2.0;
@@ -26,77 +25,29 @@ Communication::Communication(const std::string& configfile)
 	distribution_left(0), distribution_right(1), generator(std::random_device{}())
 {
 	std::ifstream config(configfile);
-	if (config.is_open()) {
-		string line;
-		while (getline(config, line)) {
-			istringstream iss(line);
-			string key;
-			if (getline(iss, key, ' ')) {
-				string value;
-				if (key == "bandwidth") {
-					if (getline(iss, value, ' ')) {
-						bandwidth = stoi(value);
-					}
-				}
-				else if (key == "velocity") {
-					if (getline(iss, value, ' ')) {
-						velocity = stod(value);
-					}
-				}
-				else if (key == "packet_size") {
-					if (getline(iss, value, ' ')) {
-						packet_size = stoi(value);
-					}
-				}
-				else if (key == "noisy") {
-					if (getline(iss, value, ' ')) {
-						noisy = stoi(value);
-					}
-				}
-				else if (key == "distribution_left") {
-					if (getline(iss, value, ' ')) {
-						distribution_left = stod(value);
-					}
-				}
-				else if (key == "distribution_right") {
-					if (getline(iss, value, ' ')) {
-						distribution_right = stod(value);
-					}
-				}
-				else if (key == "Source")
-				{
-					double lat = 0, lon = 0;
-					if (getline(iss, value, ' ')) {
-						lat = stod(value);
-						getline(iss, value, ' ');
-						lon = stod(value);
-					}
-					source = KeplerOrbits::GeoCoordinates(lat, lon, 0);
-				}
-				else if (key == "Target")
-				{
-					double lat = 0, lon = 0;
-					if (getline(iss, value, ' ')) {
-						lat = stod(value);
-						getline(iss, value, ' ');
-						lon = stod(value);
-					}
-					target = KeplerOrbits::GeoCoordinates(lat, lon, 0);
-				}
-				else if (key == "Attack")
-				{
-					double lat = 0, lon = 0;
-					if (getline(iss, value, ' ')) {
-						lat = stod(value);
-						getline(iss, value, ' ');
-						lon = stod(value);
-					}
-					attack = KeplerOrbits::GeoCoordinates(lat, lon, 0);
-				}
-			}
-		}
+	//判断配置文件是否已打开
+	if (!config.is_open()) {
+		std::cerr << "无法打开文件" << std::endl;
+		return;
 	}
+	// 读取文件内容到字符串
+	std::string content((std::istreambuf_iterator<char>(config)), std::istreambuf_iterator<char>());
 	config.close();
+	// 解析JSON字符串
+	try {
+		json j = json::parse(content);
+		bandwidth = j["bandwidth"]["value"].get<int>();
+		velocity = j["velocity"]["value"].get<int>();
+		packet_size = j["packet_size"].get<int>();
+		noisy = j["noisy"]["type"].get<int>();
+		distribution_left = j["distribution_left"].get<double>();
+		distribution_right = j["distribution_right"].get<double>();
+		source = KeplerOrbits::GeoCoordinates(j["Source"]["lat"].get<double>(), j["Source"]["lon"].get<double>(), 0);
+		target = KeplerOrbits::GeoCoordinates(j["Target"]["lat"].get<double>(), j["Target"]["lon"].get<double>(), 0);
+	}
+	catch (json::parse_error& e) {
+		std::cerr << "communication_config.json解析错误: " << e.what() << std::endl;
+	}
 }
 
 double Communication::communication_stt(vector<int> distance, vector<int> stationState, int packet_size, int bandwidth, bool add_delay)

@@ -1,0 +1,33 @@
+{
+  "bandwidth": {
+    "value": 100000000,
+    "unit": "bps"
+  },
+  "velocity": {
+    "value": 300000000,
+    "unit": "m/s"
+  },
+  "packet_size": 12000,
+  "noisy": {
+    "type": 1,
+    "description": "1gauss 2random"
+  },
+  "distribution_left": 0.5,
+  "distribution_right": 1,
+  "Source": {
+    "lat": 19.808054,
+    "lon": 110.302734
+  },
+  "Target": {
+    "lat": 45.675482,
+    "lon": 126.738281
+  },
+  "Attack": {
+    "lat": 18.808054,
+    "lon": 110.302734
+  },
+  "AR": {
+    "value": -1,
+    "description": "1=0.1km"
+  }
+}

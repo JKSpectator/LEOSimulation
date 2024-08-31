@@ -34,5 +34,10 @@ struct Vec3
 /// <summary>
 /// 初始化星座和通信模拟器
 /// </summary>
-void SInit();
+int SInit(bool attackIn = true, const string& datafile = "ConfigTxt\\city_data.json", const string& configfile = "ConfigTxt\\config.json", const string& com_configfile = "ConfigTxt\\communication_config.json");
+
+/// <summary>
+/// 更新卫星，计算通信连通性，输出包含三种通信仿真的时间组成的数组（正常通信、无噪声通信、理想通信）
+/// </summary>
+vector<double> com_sim();
 

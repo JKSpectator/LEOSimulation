@@ -71,18 +71,32 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
-    <ReferencePath>$(ReferencePath)</ReferencePath>
-    <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryWPath>$(LibraryWPath)</LibraryWPath>
+    <LibraryPath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(ExternalIncludePath)</ExternalIncludePath>
+    <ReferencePath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(ReferencePath)</ReferencePath>
+    <IncludePath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(IncludePath)</IncludePath>
+    <LibraryWPath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(LibraryWPath)</LibraryWPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
-    <ReferencePath>$(ReferencePath)</ReferencePath>
-    <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryWPath>$(LibraryWPath)</LibraryWPath>
+    <LibraryPath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(ExternalIncludePath)</ExternalIncludePath>
+    <ReferencePath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(ReferencePath)</ReferencePath>
+    <IncludePath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(IncludePath)</IncludePath>
+    <LibraryWPath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(LibraryWPath)</LibraryWPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ExternalIncludePath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(ExternalIncludePath)</ExternalIncludePath>
+    <IncludePath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(IncludePath)</IncludePath>
+    <ReferencePath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(VC_ReferencesPath_x64);</ReferencePath>
+    <LibraryPath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <LibraryWPath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(WindowsSDK_MetadataPath);</LibraryWPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ExternalIncludePath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(ExternalIncludePath)</ExternalIncludePath>
+    <IncludePath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(IncludePath)</IncludePath>
+    <ReferencePath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(VC_ReferencesPath_x64);</ReferencePath>
+    <LibraryPath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <LibraryWPath>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;$(WindowsSDK_MetadataPath);</LibraryWPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -90,12 +104,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Code\VS\LEOSimulation\OpenGL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Code\VS\LEOSimulation\OpenGL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;D:\Code\VS\LEOSimulation\OpenGL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -106,14 +120,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Code\VS\LEOSimulation\OpenGL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Code\VS\LEOSimulation\OpenGL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;D:\Code\VS\LEOSimulation\OpenGL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -123,10 +137,12 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard_C>Default</LanguageStandard_C>
+      <AdditionalIncludeDirectories>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,15 +154,18 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard_C>Default</LanguageStandard_C>
+      <AdditionalIncludeDirectories>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\Code\VS\LEOSimulation - 无可视化\nlohmann;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AttackSimulation.cpp" />
     <ClCompile Include="Constellation.cpp" />
     <ClCompile Include="DelaySimulation.cpp" />
     <ClCompile Include="KeplerOrbits\CoordinateSystems.cpp" />
@@ -156,12 +175,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Allinclude.h" />
+    <ClInclude Include="AttackSimulation.h" />
     <ClInclude Include="Constellation.h" />
     <ClInclude Include="DelaySimulation.h" />
     <ClInclude Include="KeplerOrbits\CoordinateSystems.h" />
     <ClInclude Include="KeplerOrbits\OrbitalElements.h" />
     <ClInclude Include="KeplerOrbits\OrbitBody.h" />
     <ClInclude Include="LEOSimulation.h" />
+    <ClInclude Include="nlohmann\json.hpp" />
+    <ClInclude Include="nlohmann\json_fwd.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
