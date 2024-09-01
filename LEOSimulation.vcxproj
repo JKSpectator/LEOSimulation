@@ -172,6 +172,7 @@
     <ClCompile Include="KeplerOrbits\OrbitalElements.cpp" />
     <ClCompile Include="KeplerOrbits\OrbitBody.cpp" />
     <ClCompile Include="LEOSimulation.cpp" />
+    <ClCompile Include="SimulationTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Allinclude.h" />

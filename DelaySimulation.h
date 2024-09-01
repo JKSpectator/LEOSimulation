@@ -53,7 +53,7 @@ public:
 	KeplerOrbits::GeoCoordinates target;//信息接收节点
 
 
-	Communication(const string& configfile = "ConfigTxt\\communication_config.json");
+	Communication(const string& configfile = "ConfigJSON\\communication_config.json");
 
 	/// <summary>
 	/// 获取模拟的通信时延

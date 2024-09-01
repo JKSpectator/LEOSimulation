@@ -36,6 +36,9 @@
     <ClCompile Include="AttackSimulation.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SimulationTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DelaySimulation.h">

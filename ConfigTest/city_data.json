@@ -1,0 +1,172 @@
+[
+    {
+        "name": "Haikou",
+        "lat": 19.808054,
+        "lon": 110.302734
+    },
+    {
+        "name": "Haerbin",
+        "lat": 45.675482,
+        "lon": 126.738281
+    },
+    {
+        "name": "Wulumuqi",
+        "lat": 43.675818,
+        "lon": 87.670898
+    },
+    {
+        "name": "Shenyang",
+        "lat": 41.442726,
+        "lon": 123.793945
+    },
+    {
+        "name": "Changchun",
+        "lat": 43.644025,
+        "lon": 125.332031
+    },
+    {
+        "name": "Beijing",
+        "lat": 39.904987,
+        "lon": 116.405289
+    },
+    {
+        "name": "Tianjin",
+        "lat": 39.010647,
+        "lon": 117.246093
+    },
+    {
+        "name": "Huhehaote",
+        "lat": 40.84149,
+        "lon": 111.75199
+    },
+    {
+        "name": "Yinchuan",
+        "lat": 38.48644,
+        "lon": 106.23248
+    },
+    {
+        "name": "Taiyuan",
+        "lat": 37.857014,
+        "lon": 112.549248
+    },
+    {
+        "name": "Shijiazhaung",
+        "lat": 38.045475,
+        "lon": 114.502464
+    },
+    {
+        "name": "Jinan",
+        "lat": 36.675808,
+        "lon": 117.000923
+    },
+    {
+        "name": "Zhengzhou",
+        "lat": 34.757977,
+        "lon": 113.665413
+    },
+    {
+        "name": "Xian",
+        "lat": 34.263161,
+        "lon": 108.948021
+    },
+    {
+        "name": "Wuhan",
+        "lat": 30.584354,
+        "lon": 114.298569
+    },
+    {
+        "name": "Nanjing",
+        "lat": 32.041546,
+        "lon": 118.76741
+    },
+    {
+        "name": "Hefei",
+        "lat": 31.861191,
+        "lon": 117.283043
+    },
+    {
+        "name": "Shanghai",
+        "lat": 31.231707,
+        "lon": 121.472641
+    },
+    {
+        "name": "Changsha",
+        "lat": 28.19409,
+        "lon": 112.982277
+    },
+    {
+        "name": "Nanchang",
+        "lat": 28.676493,
+        "lon": 115.892151
+    },
+    {
+        "name": "Hangzhou",
+        "lat": 30.287458,
+        "lon": 120.15358
+    },
+    {
+        "name": "Fuzhou",
+        "lat": 26.075302,
+        "lon": 119.306236
+    },
+    {
+        "name": "Guangzhou",
+        "lat": 23.125177,
+        "lon": 113.28064
+    },
+    {
+        "name": "Taibei",
+        "lat": 25.030724,
+        "lon": 121.520076
+    },
+    {
+        "name": "Nanning",
+        "lat": 22.82402,
+        "lon": 108.320007
+    },
+    {
+        "name": "Chongqing",
+        "lat": 29.533155,
+        "lon": 106.504959
+    },
+    {
+        "name": "Kunming",
+        "lat": 25.040609,
+        "lon": 102.71225
+    },
+    {
+        "name": "Guiyang",
+        "lat": 26.578342,
+        "lon": 106.713478
+    },
+    {
+        "name": "Chengdu",
+        "lat": 30.659462,
+        "lon": 104.065735
+    },
+    {
+        "name": "Lanzhou",
+        "lat": 36.06138,
+        "lon": 103.83417
+    },
+    {
+        "name": "Xining",
+        "lat": 36.61729,
+        "lon": 101.77782
+    },
+    {
+        "name": "Lasa",
+        "lat": 29.64415,
+        "lon": 91.1145
+    },
+    {
+        "name": "Hongkong",
+        "lat": 22.27534,
+        "lon": 114.16546
+    },
+    {
+        "name": "Aomen",
+        "lat": 22.19875,
+        "lon": 113.54913
+    }
+]

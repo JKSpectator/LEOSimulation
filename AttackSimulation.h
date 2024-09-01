@@ -11,6 +11,6 @@ public:
 	/// 初始化函数
 	/// </summary>
 	/// <param name="configfile">配置文件的地址</param>
-	AttackSimulation(const string& configfile = "ConfigTxt\\communication_config.json");
+	AttackSimulation(const string& configfile = "ConfigJSON\\communication_config.json");
 };
 

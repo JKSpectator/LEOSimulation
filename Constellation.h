@@ -113,7 +113,7 @@ public:
 	//发送到接收经过的路径距离，其中第一位元素为总距离
 	vector<int> pathDistance;
 	//初始化函数
-	Constellation(const string& datafile = "ConfigTxt\\city_data.json", const string& configfile = "ConfigTxt\\config.json");
+	Constellation(const string& datafile = "ConfigJSON\\city_data.json", const string& configfile = "ConfigJSON\\config.json");
 	//地理坐标系到笛卡尔坐标系转换
 	vector<double> LatLonToXYZ(double lat, double lon);
 	//更新卫星的函数

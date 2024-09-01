@@ -1,14 +1,19 @@
 ﻿#include "Constellation.h"
 
-long long m_map[MAX_SATALLITE_NUM][MAX_SATALLITE_NUM];  //邻接矩阵存储 
-int path[MAX_SATALLITE_NUM][MAX_SATALLITE_NUM]; //路径矩阵
+//邻接矩阵存储 
+long long m_map[MAX_SATALLITE_NUM][MAX_SATALLITE_NUM];  
+//路径矩阵
+int path[MAX_SATALLITE_NUM][MAX_SATALLITE_NUM];
+//卫星数量
 int n;
 
+//随机数配置
 std::random_device rd;
 std::mt19937 gen(rd());
 
 // 定义分布
 std::uniform_int_distribution<> dis(0, 10);
+//间接设置失能卫星的概率
 #define DISABLED_NUM 3
 
 GroundStation::GroundStation(int ID, string Name, double Lat, double Lon, double X, double Y, double Z, double R)
