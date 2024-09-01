@@ -16,6 +16,17 @@ std::uniform_int_distribution<> dis(0, 10);
 //间接设置失能卫星的概率
 #define DISABLED_NUM 3
 
+/// <summary>
+/// 地面站初始化
+/// </summary>
+/// <param name="ID">地面站ID</param>
+/// <param name="Name">地面站名字</param>
+/// <param name="Lat">地面站纬度</param>
+/// <param name="Lon">地面站经度</param>
+/// <param name="X">地面站笛卡尔坐标系X</param>
+/// <param name="Y">地面站笛卡尔坐标系Y</param>
+/// <param name="Z">地面站笛卡尔坐标系Z</param>
+/// <param name="R">地面站通信距离</param>
 GroundStation::GroundStation(int ID, string Name, double Lat, double Lon, double X, double Y, double Z, double R)
 {
 	id = ID;
@@ -28,22 +39,46 @@ GroundStation::GroundStation(int ID, string Name, double Lat, double Lon, double
 	comR = R;
 }
 
+/// <summary>
+/// 设置经纬度
+/// </summary>
+/// <param name="Lat">纬度</param>
+/// <param name="Lon">经度</param>
 void GroundStation::SetLatAndLon(double Lat, double Lon)
 {
 	lat = Lat;
 	lon = Lon;
 }
 
+/// <summary>
+/// 获取地面站物理坐标系的纬度
+/// </summary>
+/// <returns>纬度</returns>
 double GroundStation::Lat()
 {
 	return lat;
 }
 
+/// <summary>
+/// 获取地面站物理坐标系的经度
+/// </summary>
+/// <returns>经度</returns>
 double GroundStation::Lon()
 {
 	return lon;
 }
 
+/// <summary>
+/// 初始化卫星站
+/// </summary>
+/// <param name="ID">卫星ID</param>
+/// <param name="pnum">轨道平面序号</param>
+/// <param name="onum">卫星在轨道上等分的位置序号</param>
+/// <param name="toffset">卫星时间偏移</param>
+/// <param name="X">卫星笛卡尔坐标系X</param>
+/// <param name="Y">卫星笛卡尔坐标系Y</param>
+/// <param name="Z">卫星笛卡尔坐标系Z</param>
+/// <param name="enabledK">使能情况</param>
 SatelliteStation::SatelliteStation(int ID, int pnum, int onum, double toffset, double X, double Y, double Z, int enabledK)
 {
 	id = ID;
@@ -56,6 +91,11 @@ SatelliteStation::SatelliteStation(int ID, int pnum, int onum, double toffset, d
 	enabled = enabledK;
 }
 
+/// <summary>
+/// 初始化星座模拟器
+/// </summary>
+/// <param name="datafile">数据文件路径</param>
+/// <param name="configfile">配置文件路径</param>
 Constellation::Constellation(const string& datafile, const string& configfile)
 {
 	attack.push_back(GroundStation(0, "null", 0, 0, 0, 0, 0));
@@ -231,6 +271,12 @@ Constellation::Constellation(const string& datafile, const string& configfile)
 	}
 }
 
+/// <summary>
+/// 物理坐标系到笛卡尔坐标系的转换
+/// </summary>
+/// <param name="lat"></param>
+/// <param name="lon"></param>
+/// <returns></returns>
 vector<double> Constellation::LatLonToXYZ(double lat, double lon) {
 	vector<double> ans;
 	double an;
