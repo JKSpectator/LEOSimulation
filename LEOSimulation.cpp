@@ -53,19 +53,18 @@ vector<double> com_sim()
 
 int main(int argc, char* argv[])
 {
-	TestInit(cs, comm, as);
-	testT(cs, comm, 10);
-	//vector<double> delay;
-	//while (true)
-	//{
-	//	delay = com_sim();
-	//	//判断是否找到可行通信路径
-	//	if (delay.size() != 0)
-	//	{
-	//		cout << "通信延迟：" << delay[0] << endl;
-	//		cout << "无噪声通信延迟：" << delay[1] << endl;
-	//		cout << "最理想通信延迟：" << delay[2] << endl;
-	//	}
-	//}
+	SInit();
+	vector<double> delay;
+	while (true)
+	{
+		delay = com_sim();
+		//判断是否找到可行通信路径
+		if (delay.size() != 0)
+		{
+			cout << "通信延迟：" << delay[0] << endl;
+			cout << "无噪声通信延迟：" << delay[1] << endl;
+			cout << "最理想通信延迟：" << delay[2] << endl;
+		}
+	}
 	return 0;
 }

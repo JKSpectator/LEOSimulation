@@ -292,6 +292,9 @@ vector<double> Constellation::LatLonToXYZ(double lat, double lon) {
 }
 
 #ifdef ATTACK_K
+/// <summary>
+/// 更新卫星数据
+/// </summary>
 void Constellation::updateSatellites()
 {
 	m_time++;
@@ -418,6 +421,9 @@ void Constellation::updateSatellites()
 		shortestPathByFloyd();
 }
 #else
+/// <summary>
+/// 更新卫星数据
+/// </summary>
 void Constellation::updateSatellites()
 {
 	m_time++;
@@ -524,6 +530,12 @@ void Constellation::updateSatellites()
 }
 #endif // ATTACK_K
 
+/// <summary>
+/// 计算卫星与地面站通信的最大距离
+/// </summary>
+/// <param name="max_deg">可通信角度0-90</param>
+/// <param name="m_sma">通信长半轴</param>
+/// <returns>通信最长距离</returns>
 double Constellation::calculateMaxSpaceToGndDistance(double max_deg, double m_sma)
 {
 	if (m_sma == -1)
@@ -532,6 +544,11 @@ double Constellation::calculateMaxSpaceToGndDistance(double max_deg, double m_sm
 	return sqrt(pow(m_sma, 2) - pow(earth_radius * sin(max_deg), 2)) - earth_radius * cos(max_deg);
 }
 
+/// <summary>
+/// 计算平面轨道间通信的最大距离
+/// </summary>
+/// <param name="min_communication_altitude">最小通信高度</param>
+/// <returns>平面轨道间通信的最大距离</returns>
 double Constellation::calculateMaxISLDistance(int min_communication_altitude)
 {
 	int c = (int)earth_radius + min_communication_altitude;
@@ -543,11 +560,20 @@ double Constellation::calculateMaxISLDistance(int min_communication_altitude)
 	return int(a * 2);
 }
 
+/// <summary>
+/// 计算卫星间距离
+/// </summary>
+/// <param name="s1">卫星1</param>
+/// <param name="s2">卫星2</param>
+/// <returns>距离</returns>
 double Constellation::calculateDistanceBetweenSatellites(SatelliteStation s1, SatelliteStation s2)
 {
 	return sqrt(pow(s1.x - s2.x, 2) + pow(s1.y - s2.y, 2) + pow(s1.z - s2.z, 2));
 }
 
+/// <summary>
+/// 最短路径辅助函数
+/// </summary>
 void Constellation::shortestPathByFloyd()
 {
 	n = satellites.size() + 2;
@@ -613,6 +639,11 @@ void Constellation::shortestPathByFloyd()
 	}
 }
 
+/// <summary>
+/// 添加通信的数据来源地面站和目标地面站
+/// </summary>
+/// <param name="source">来源地面站</param>
+/// <param name="target">目标地面站</param>
 void Constellation::AddGroundSandT(KeplerOrbits::GeoCoordinates source, KeplerOrbits::GeoCoordinates target)
 {
 	GroundStation gsT = GroundStation(-1 * grounds.size() - 1, "Target", target.latitude(), target.longitude(), LatLonToXYZ(target.latitude(), target.longitude())[0], LatLonToXYZ(target.latitude(), target.longitude())[1], LatLonToXYZ(target.latitude(), target.longitude())[2]);
@@ -621,6 +652,11 @@ void Constellation::AddGroundSandT(KeplerOrbits::GeoCoordinates source, KeplerOr
 	grounds.insert(grounds.begin(), gsS);
 }
 
+/// <summary>
+/// 添加攻击站点
+/// </summary>
+/// <param name="attackStation">攻击站点的地理坐标系的值</param>
+/// <param name="comR">攻击距离</param>
 void Constellation::AddAttackStation(KeplerOrbits::GeoCoordinates attackStation, double comR)
 {
 	attack[0].SetLatAndLon(attackStation.latitude(), attackStation.longitude());
